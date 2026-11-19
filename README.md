@@ -62,6 +62,7 @@ shows every slide layout the kit has, in your colors.
 | Key | Does |
 |---|---|
 | ? | Every key, and what the slide you're on does |
+| V | Under the hood: how this slide is built, ready to copy into an AI chat |
 | → ← Space | Next, previous |
 | G | See all slides; drag to reorder; right-click to skip one |
 | F | Search for a slide |
@@ -69,6 +70,15 @@ shows every slide layout the kit has, in your colors.
 | S, P | When the agent has suggested changes: step through them, preview them accepted |
 | H | Back to the start |
 | L | Laser pointer |
+
+## Peek under the hood
+
+On any slide, press **V** (or click **</> under the hood** at the top
+right of the example and menu pages). The slide steps aside with an X-ray
+of every box on it, and a panel shows its structure as a tree, its HTML
+exactly as written, the CSS that styles it and the code behind any effect.
+**Copy for an AI** puts it all on your clipboard with a short prompt: paste
+it into any chat and ask how it works, or for one like it.
 
 ## Make it move
 

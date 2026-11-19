@@ -264,6 +264,22 @@
     }
   };
   var ORDER = Object.keys(FX);
+  var DOCS = {
+    stagger: 'its children appear one after another',
+    steps: 'its children appear one per click; ← takes one back',
+    typewriter: 'plain text types itself out',
+    scramble: 'plain text decodes from random letters',
+    count: 'a number counts up from 0',
+    pop: 'appears after a beat with a little bounce',
+    mark: '.mark highlights sweep in behind the words',
+    zoom: 'slow push-in on the image inside',
+    reveal: 'blurred until clicked',
+    flip: 'a card with .front and .back turns over on click',
+    timer: 'counts down data-seconds while the slide shows',
+    clock: "the viewer's current time, ticking",
+    until: 'counts down to a clock time (data-until)',
+    today: "the viewer's day of the week"
+  };
 
   // ---- running a slide ----
   function reset(slide) {
@@ -346,5 +362,11 @@
   // The deck may have announced its first slide before this file loaded.
   if (current()) run(current(), false);
 
-  window.DeckFx = { names: ORDER.slice(), run: run };
+  window.DeckFx = {
+    names: ORDER.slice(),
+    docs: DOCS,
+    run: run,
+    // The code behind one effect, for engine/peek.js's Effect tab.
+    source: function (name) { return FX[name] ? 'FX.' + name + ' = ' + FX[name].toString() : ''; }
+  };
 })();

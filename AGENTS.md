@@ -144,6 +144,18 @@ on my Promise slide").
 - `steps` hold the → key until every item is out. Make sure the presenter
   knows, or they'll think the clicker stopped working.
 
+## Under the hood (V)
+
+`engine/peek.js` lets anyone press V on a slide to see how it's built and
+copy it for an AI chat. If the presenter pastes you text that starts "This
+is one slide from an HTML slide deck made with html-deck-kit", they copied
+a slide they liked (from the example, the effects menu, or someone else's
+deck): treat it as "make me a slide like this", adapted to their content
+and theme. peek.js must load before `engine/deck-stage.js` and without
+`defer`, or it shows the engine's runtime attributes instead of the file's
+HTML. `data-tab` on its script tag adds the clickable </> tab; leave it off
+for decks being presented.
+
 ## Rehearsal: the edit loop
 
 - **They fix words themselves.** In the deck: press E, click any text, type.
@@ -299,6 +311,7 @@ Thanks with one QR → backup slides and Appendix after the close.
 | Key | Does |
 |---|---|
 | ? | Every key, plus what the current slide does (steps, flip cards…) |
+| V | Under the hood: X-ray of the slide, plus its map, HTML, CSS and effect code, with Copy for an AI |
 | → ← Space | Next, previous |
 | 1–9 | Jump to that slide |
 | H | Back to the first slide |

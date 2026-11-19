@@ -11,6 +11,7 @@ slides in `theme.css` and `index.html` instead.
 | `slide-numbers.js` | The small slide number in the corner; `data-slide-num` overrides |
 | `suggest.js` | Shows the agent's suggestion marks; S steps through them, P previews them accepted |
 | `key-help.js` | Press ? for every key, including what the current slide does |
+| `peek.js` | Press V: X-ray of the slide plus its map, HTML, CSS and effect code, with Copy for an AI. Loads before `deck-stage.js` |
 | `effects.js` | The effects in `effects.html`, switched on with `data-fx`. Optional |
 | `magic-keys.js` | Blur, confetti, drumroll, mic drop, bubbles, shh, curtain, timers on keys. Optional |
 
