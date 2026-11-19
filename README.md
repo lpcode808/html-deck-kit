@@ -9,7 +9,9 @@ if you have a GitHub account. Or tell your agent: *"Copy
 https://github.com/lpcode808/html-deck-kit into a new folder for my talk,
 then read AGENTS.md and start the kickoff interview."*
 
-A snapshot, shared as is. Copy it, change anything, make it yours.
+A snapshot, shared as is. Written with AI coding agents and dedicated to the
+public domain ([CC0](LICENSE)): copy it, change anything, make it yours, no
+credit needed.
 
 ---
 
