@@ -1,0 +1,161 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<meta name="robots" content="noindex, nofollow" />
+<title>Example Deck</title>
+<link rel="stylesheet" href="theme.css" />
+<script type="application/json" id="speaker-notes">[
+  "This is a finished example made with the kit: same engine, same layouts, its own colors. Press the right arrow to move through it, G to see every slide.",
+  "Slide apps keep the deck inside their own format. An HTML deck is a text file, so an agent can read it, change many slides at once, and show exactly what changed.",
+  "The three habits the kit runs on. Each one comes back later in the deck.",
+  "That's the whole setup. The agent reads AGENTS.md and takes it from there: a few questions at a time, each with a recommended answer.",
+  "This is the real starter deck in grid view. Twelve placeholder slides in the order that has held up in conference rooms, with backup slides after the close.",
+  "When the agent wants to add, cut or reword something, it marks the change on the slide itself, like suggestions in a shared doc. You review the real slide and answer in bulk.",
+  "Slides can run code. This timer listens for its slide to appear and stops when you leave. Press R to restart it.",
+  "The kit's check script catches leftover TODOs, notes out of step with slides, missing files and faint colors. The PDF is the backup if the projector or laptop fails.",
+  "The kit brings the structure; you bring the look and the voice.",
+  "Scan to get the kit. Leave this up through questions.",
+  "Backup slides live after the close. Press F to search for one during Q&A.",
+  "The example's own abstract (in example/plan/brief.md), checked against where each promise happens."
+]</script>
+</head>
+<body>
+
+<!--
+  A finished example made with this kit. It shares ../engine/ with the
+  starter deck and has its own theme.css (a made-up palette). Read it for
+  reference; your own deck is ../index.html.
+-->
+
+<deck-stage width="1920" height="1080" no-rail>
+
+  <section data-screen-label="Title" data-slide-num="hidden" class="surface-ink p-title">
+    <p class="eyebrow">An example deck · made with html-deck-kit</p>
+    <h1 class="hero">Your slides, as a web page your agent can edit</h1>
+    <p class="sub">How this deck got made, in about ten slides</p>
+    <p class="byline">Press → to start, G to see them all</p>
+  </section>
+
+  <section data-screen-label="Hook" class="surface-paper p-statement">
+    <p class="eyebrow">The problem</p>
+    <h2 class="title">Your agent can't reach inside a slide app, but it can edit a file</h2>
+    <p class="sub">So make the deck a file</p>
+  </section>
+
+  <section data-screen-label="Promise" class="surface-alt">
+    <p class="eyebrow">Three habits</p>
+    <h2 class="title">What the kit runs on</h2>
+    <div class="cards">
+      <div class="card"><span class="num">01</span><h3>Interview first</h3><p>The agent asks before it builds</p></div>
+      <div class="card"><span class="num">02</span><h3>One chunk at a time</h3><p>React to real slides, not plans</p></div>
+      <div class="card"><span class="num">03</span><h3>You stay the editor</h3><p>Press E and fix the words yourself</p></div>
+    </div>
+  </section>
+
+  <section data-screen-label="Getting Started" class="surface-paper">
+    <p class="eyebrow">Getting started</p>
+    <h2 class="title">Three moves to a first slide</h2>
+    <ol class="steps">
+      <li>Copy the kit into a folder for your talk<small>Download the zip, or "Use this template" on GitHub</small></li>
+      <li>Open the folder in your agent and say: "Read AGENTS.md and start the kickoff interview"</li>
+      <li>Answer a few questions at a time<small>"recs" accepts its recommendations; "later" skips one</small></li>
+    </ol>
+  </section>
+
+  <section data-screen-label="The Starter" class="surface-alt p-figure">
+    <div class="shot"><img src="assets/starter-grid.png" alt="The starter deck in grid view: twelve placeholder slides from Title to What I Promised" /></div>
+    <div class="words">
+      <p class="eyebrow">The starter</p>
+      <h2 class="title">Twelve slides, already in a good order</h2>
+      <p class="small">Title, promise, your turn, thanks, with backup after the close</p>
+    </div>
+  </section>
+
+  <section data-screen-label="Suggestions" class="surface-paper p-figure">
+    <div class="shot"><img src="assets/suggestion.png" alt="A slide with a suggested edit: the old title struck through and a shorter one highlighted" /></div>
+    <div class="words">
+      <p class="eyebrow">Suggest, don't surprise</p>
+      <h2 class="title">Changes show up on the slide</h2>
+      <p class="small">S steps through them, M previews them accepted, then you reply in bulk</p>
+    </div>
+  </section>
+
+  <section data-screen-label="Live Timer" class="surface-ink p-statement" data-timer="180">
+    <p class="eyebrow">Slides that run code</p>
+    <div class="timer" data-no-edit>3:00</div>
+    <p class="sub">This counts down only while its slide is showing</p>
+  </section>
+
+  <section data-screen-label="Before the Day" class="surface-alt">
+    <p class="eyebrow">Before the day</p>
+    <h2 class="title">Three checks before you present</h2>
+    <div class="cards">
+      <div class="card"><span class="num">01</span><h3>Run the checks</h3><p>One script finds TODOs, missing files, faint colors</p></div>
+      <div class="card"><span class="num">02</span><h3>Print to PDF</h3><p>Your backup if anything fails</p></div>
+      <div class="card"><span class="num">03</span><h3>Scan every QR</h3><p>From a phone, from the back row</p></div>
+    </div>
+  </section>
+
+  <section data-screen-label="Close" class="surface-ink p-statement">
+    <h2 class="title">Bring your colors and your voice. The structure's already here</h2>
+  </section>
+
+  <section data-screen-label="Thanks" class="surface-accent p-close">
+    <div class="words">
+      <p class="eyebrow">Make your own</p>
+      <h2 class="hero">Thank you</h2>
+      <p class="sub">Copy the kit and start your own deck</p>
+    </div>
+    <div class="qr">
+      <img src="assets/qr-repo.png" alt="QR code for the html-deck-kit repository" />
+      <span class="url">github.com/lpcode808/html-deck-kit</span>
+    </div>
+  </section>
+
+  <section data-screen-label="Appendix" data-slide-num="A" class="surface-ink p-divider">
+    <span class="big-num">A</span>
+    <h2 class="title">Appendix</h2>
+    <p class="sub">Backup slides for questions. Press F to search.</p>
+  </section>
+
+  <section data-screen-label="What I Promised" data-slide-num="A1" class="surface-paper">
+    <p class="eyebrow">Backup · the abstract, checked</p>
+    <h2 class="title" style="font-size: 64px;">What this deck promised, and where</h2>
+    <table class="promises">
+      <tr><th>The abstract says</th><th>Where it happens</th></tr>
+      <tr><td>"See how an agent interviews you before it builds"</td><td>Promise, Getting Started</td></tr>
+      <tr><td>"Watch changes arrive as suggestions you can accept"</td><td>Suggestions</td></tr>
+      <tr><td>"Leave knowing what to check before the day"</td><td>Before the Day</td></tr>
+    </table>
+  </section>
+
+</deck-stage>
+
+<script src="../engine/deck-stage.js"></script>
+<script src="../engine/slide-numbers.js"></script>
+<script src="../engine/slide-search.js" defer></script>
+<script src="../engine/suggest.js" defer></script>
+<script>
+  // Live Timer: runs only while its slide is on screen; R replays it.
+  (function () {
+    var tick = null;
+    function fmt(s) { return Math.floor(s / 60) + ':' + String(s % 60).padStart(2, '0'); }
+    document.querySelector('deck-stage').addEventListener('slidechange', function (e) {
+      clearInterval(tick);
+      var slide = e.detail.slide;
+      if (!slide || !slide.dataset.timer) return;
+      var left = Number(slide.dataset.timer);
+      var face = slide.querySelector('.timer');
+      face.textContent = fmt(left);
+      tick = setInterval(function () {
+        left = Math.max(0, left - 1);
+        face.textContent = fmt(left);
+        if (!left) clearInterval(tick);
+      }, 1000);
+    });
+  })();
+</script>
+</body>
+</html>

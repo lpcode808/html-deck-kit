@@ -1,0 +1,158 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<meta name="robots" content="noindex, nofollow" />
+<title>TODO Talk Title</title>
+<link rel="stylesheet" href="theme.css" />
+<!--
+  Speaker notes: one string per slide, in the same order as the <section>s
+  below. Add or remove a slide → add or remove its note at the same spot.
+  Easiest to write in the browser: press E, then Notes.
+-->
+<script type="application/json" id="speaker-notes">[
+  "Walk-in slide. Up while people arrive. Say your name and the one-line promise.",
+  "The hook: why this matters to THIS room, today. One claim, said out loud, not read.",
+  "The three things they leave with. These should match the abstract word for word in spirit; see the What I Promised slide at the back.",
+  "The map. Name the three parts so people know where they are later.",
+  "Part 1 starts.",
+  "Claim, then the real artifact as evidence. Explain the screenshot out loud; the slide only carries the headline.",
+  "The thing they do. Give a lane for people who would rather watch.",
+  "One fix per likely problem. Leave this up while people try.",
+  "The line you want them to remember. Pause after it.",
+  "Thank you. Leave this up through Q&A so people can scan the QR.",
+  "Everything after here is backup: reachable during Q&A, not part of the main path. Press F to search for one.",
+  "Planning check that doubles as a Q&A backup. Each promise from the abstract, and the slide that keeps it."
+]</script>
+</head>
+<body>
+
+<!--
+  HOW THIS FILE WORKS
+  - Each <section> is one slide, in order. data-screen-label is its name;
+    use it when you talk about a slide ("fix Promise").
+  - Pick one surface per slide: surface-paper, surface-alt, surface-ink,
+    surface-accent. Pick a layout from patterns.html (p-statement, cards,
+    p-figure, p-quote, p-divider, steps, p-close).
+  - Anything unfinished says TODO, so a search finds it before you present.
+  - Colors and fonts live in theme.css, not here.
+-->
+
+<deck-stage width="1920" height="1080" no-rail>
+
+  <section data-screen-label="Title" data-slide-num="hidden" class="surface-ink p-title">
+    <p class="eyebrow">TODO Event name · Date</p>
+    <h1 class="hero">TODO Your talk title</h1>
+    <p class="sub">TODO One line: what people leave with</p>
+    <p class="byline">TODO Your name · your role</p>
+  </section>
+
+  <section data-screen-label="Hook" class="surface-paper p-statement">
+    <p class="eyebrow">TODO Small context label</p>
+    <h2 class="title">TODO One big claim, in the words you'd say out loud</h2>
+    <p class="sub">TODO One line of support, or delete this line</p>
+  </section>
+
+  <section data-screen-label="Promise" class="surface-alt">
+    <p class="eyebrow">You leave with</p>
+    <h2 class="title">TODO Three things you'll be able to do</h2>
+    <div class="cards">
+      <div class="card"><span class="num">01</span><h3>TODO First</h3><p>TODO About a line</p></div>
+      <div class="card"><span class="num">02</span><h3>TODO Second</h3><p>TODO About a line</p></div>
+      <div class="card"><span class="num">03</span><h3>TODO Third</h3><p>TODO About a line</p></div>
+    </div>
+  </section>
+
+  <section data-screen-label="Map" class="surface-paper">
+    <p class="eyebrow">Where we're going</p>
+    <h2 class="title">TODO Today in three parts</h2>
+    <ol class="steps">
+      <li>TODO Part one</li>
+      <li>TODO Part two</li>
+      <li>TODO Part three</li>
+    </ol>
+  </section>
+
+  <section data-screen-label="Part 1" class="surface-ink p-divider">
+    <span class="big-num">1</span>
+    <h2 class="title">TODO Name of part one</h2>
+  </section>
+
+  <section data-screen-label="Claim and Evidence" class="surface-paper p-figure">
+    <div class="shot">
+      <!-- Swap for a real screenshot or photo in assets/: <img src="assets/your-shot.png" alt="What it shows"> -->
+      <div class="placeholder-shot">TODO real screenshot or photo</div>
+    </div>
+    <div class="words">
+      <p class="eyebrow">TODO Context</p>
+      <h2 class="title">TODO What this shows, as a claim</h2>
+      <p class="small">TODO Where it came from (source, date)</p>
+    </div>
+  </section>
+
+  <section data-screen-label="Your Turn" class="surface-alt">
+    <p class="eyebrow">Your turn · TODO minutes</p>
+    <h2 class="title">TODO Try it</h2>
+    <ol class="steps">
+      <li>TODO First step<small>TODO Where to click, or what to type</small></li>
+      <li>TODO Second step</li>
+      <li>TODO Third step</li>
+    </ol>
+    <p class="small">Rather watch? That counts. TODO what to watch for</p>
+  </section>
+
+  <section data-screen-label="If It Goes Sideways" class="surface-paper">
+    <p class="eyebrow">If it goes sideways</p>
+    <h2 class="title">One fix per problem</h2>
+    <div class="cards">
+      <div class="card"><h3>TODO It got confused</h3><p>TODO The one fix</p></div>
+      <div class="card"><h3>TODO It won't load</h3><p>TODO The one fix</p></div>
+      <div class="card"><h3>TODO I'm on a phone</h3><p>TODO The one fix</p></div>
+    </div>
+  </section>
+
+  <section data-screen-label="Close" class="surface-ink p-statement">
+    <h2 class="title">TODO The line you want them to remember</h2>
+  </section>
+
+  <section data-screen-label="Thanks" class="surface-accent p-close">
+    <div class="words">
+      <p class="eyebrow">Take it with you</p>
+      <h2 class="hero">Thank you</h2>
+      <p class="sub">TODO Your name · how to reach you</p>
+    </div>
+    <div class="qr">
+      <!-- Swap for a real QR image in assets/: <img src="assets/qr-links.png" alt="QR code for the links page"> -->
+      <div class="qr-slot">TODO QR code<br />to your links page</div>
+      <span class="url">TODO short.url/here</span>
+    </div>
+  </section>
+
+  <!-- ===== Backup: after the close. Reachable in Q&A, not on the main path. ===== -->
+
+  <section data-screen-label="Appendix" data-slide-num="A" class="surface-ink p-divider">
+    <span class="big-num">A</span>
+    <h2 class="title">Appendix</h2>
+    <p class="sub">Backup slides for questions. Press F to search.</p>
+  </section>
+
+  <section data-screen-label="What I Promised" data-slide-num="A1" class="surface-paper">
+    <p class="eyebrow">Backup · the abstract, checked</p>
+    <h2 class="title" style="font-size: 64px;">What I promised, and where it happens</h2>
+    <table class="promises">
+      <tr><th>The abstract says</th><th>Where it happens</th></tr>
+      <tr><td>TODO Promise one, quoted</td><td>TODO slide name</td></tr>
+      <tr><td>TODO Promise two, quoted</td><td>TODO slide name</td></tr>
+      <tr><td>TODO Promise three, quoted</td><td>TODO slide name</td></tr>
+    </table>
+  </section>
+
+</deck-stage>
+
+<script src="engine/deck-stage.js"></script>
+<script src="engine/slide-numbers.js"></script>
+<script src="engine/slide-search.js" defer></script>
+<script src="engine/suggest.js" defer></script>
+</body>
+</html>

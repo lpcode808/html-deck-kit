@@ -1,0 +1,239 @@
+/* ==================================================================
+   theme.css: the look of your deck. Two halves.
+
+   1. TOKENS (top): your colors and fonts. These ship as neutral grays
+      on purpose; the kickoff interview replaces them with your brand.
+      Change a token here and every slide follows.
+   2. PATTERNS (below): the slide layouts. These carry the kit's
+      opinions about structure. Restyle them freely; keep the class
+      names so the agent and patterns.html stay in step.
+
+   Slides are designed on a fixed 1920x1080 stage and scaled to fit the
+   screen, so sizes are in px and mean the same thing on every projector.
+   ================================================================== */
+
+/* Self-hosted fonts go here (see fonts/README.md). Example:
+@font-face {
+  font-family: "Your Display Font";
+  src: url("fonts/YourDisplayFont.ttf");   (or .woff2; the file you actually have)
+  font-weight: 100 900;
+  font-display: swap;
+}
+*/
+
+:root {
+  /* ---- Color roles. Fill these from your palette. ----
+     Every TEXT pairing must reach 4.5:1 contrast. Run
+     `python scripts/check.py` after changing them; it measures. */
+  --paper:          #f7f6f2;  /* light slide background */
+  --paper-alt:      #ebe9e2;  /* second light background, for rhythm */
+  --ink:            #17191e;  /* dark slide background, and text on paper */
+  --ink-soft:       #4b505a;  /* quieter text on paper (captions, eyebrows) */
+  --on-ink:         #f4f3ef;  /* text on dark slides */
+  --accent:         #5b606b;  /* your main brand color: fills, rules, dots */
+  --accent-text:    #474b54;  /* accent for TEXT on paper and paper-alt. Darken the
+                                 accent until it passes; if it turns muddy (gold →
+                                 olive), use your other brand color here instead */
+  --accent-on-ink:  #c7cad1;  /* accent for text and marks on dark slides. A light
+                                 second brand color often fits here */
+  --on-accent:      #ffffff;  /* text on accent slides. White for a dark accent,
+                                 --ink for a light one (gold, yellow, sky) */
+  --highlight:      #ffe27a;  /* the one "look here" mark; use sparingly */
+
+  /* ---- Fonts. System fonts until you pick your own. ---- */
+  --font-display: system-ui, "Segoe UI", -apple-system, Roboto, sans-serif;
+  --font-body:    system-ui, "Segoe UI", -apple-system, Roboto, sans-serif;
+  --font-mono:    ui-monospace, "Cascadia Mono", Consolas, Menlo, monospace;
+
+  /* ---- Type scale (px on the 1920x1080 stage). ----
+     Floor: nothing an audience must read goes below 28px. */
+  --size-hero:   112px;
+  --size-title:   84px;
+  --size-sub:     44px;
+  --size-body:    38px;
+  --size-small:   28px;
+  --size-eyebrow: 26px;
+
+  --radius: 20px;
+  --pad-y: 96px;
+  --pad-x: 128px;
+}
+
+/* ==================================================================
+   Stage scaffolding. Leave this alone.
+   ================================================================== */
+* { box-sizing: border-box; }
+html, body { margin: 0; height: 100%; background: var(--ink); }
+deck-stage:not(:defined) { visibility: hidden; }
+
+deck-stage > section {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 28px;
+  padding: var(--pad-y) var(--pad-x);
+  font-family: var(--font-body);
+  font-size: var(--size-body);
+  line-height: 1.3;
+}
+
+/* ==================================================================
+   Surfaces: one per slide, sets background + text color.
+   Alternate them for rhythm; dark for openings, dividers and closes.
+   ================================================================== */
+.surface-paper  { background: var(--paper);     color: var(--ink); }
+.surface-alt    { background: var(--paper-alt); color: var(--ink); }
+.surface-ink    { background: var(--ink);       color: var(--on-ink); }
+.surface-accent { background: var(--accent);    color: var(--on-accent); }
+
+/* ==================================================================
+   Type. Hierarchy is orientation → assertion → support:
+   a small eyebrow, one big claim, then a little evidence.
+   ================================================================== */
+h1, h2, h3, p { margin: 0; }
+h1, h2, h3 { font-family: var(--font-display); font-weight: 800; line-height: 1.05; text-wrap: balance; }
+
+.eyebrow {
+  font-family: var(--font-mono);
+  font-size: var(--size-eyebrow);
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--accent-text);
+}
+.title { font-size: var(--size-title); }
+.hero  { font-size: var(--size-hero); }
+.sub   { font-size: var(--size-sub); font-weight: 400; line-height: 1.25; }
+.lede  { font-size: var(--size-sub); line-height: 1.3; max-width: 1400px; }
+.small { font-size: var(--size-small); color: var(--ink-soft); }
+.mark  { background: var(--highlight); color: var(--ink); padding: 0 .15em; border-radius: 6px; }
+
+.surface-ink .eyebrow   { color: var(--accent-on-ink); }
+.surface-ink .small     { color: var(--on-ink); opacity: .8; }
+.surface-accent .eyebrow,
+.surface-accent .small  { color: var(--on-accent); opacity: .85; }
+
+.dot-list { list-style: none; padding: 0; margin: 0; display: grid; gap: 22px; }
+.dot-list li { position: relative; padding-left: 48px; }
+.dot-list li::before {
+  content: ""; position: absolute; left: 0; top: .5em;
+  width: 18px; height: 18px; border-radius: 50%; background: var(--accent);
+}
+.surface-ink .dot-list li::before { background: var(--accent-on-ink); }
+.surface-accent .dot-list li::before { background: var(--on-accent); }
+
+/* ==================================================================
+   PATTERNS. Each one is shown, labeled, in patterns.html.
+   ================================================================== */
+
+/* --- Title: event line, the talk title, a one-line promise, who --- */
+.p-title { justify-content: flex-end; padding-bottom: 140px; }
+.p-title .hero { max-width: 1500px; }
+.p-title .byline { margin-top: 20px; font-size: var(--size-small); opacity: .85; }
+
+/* --- Statement: one claim, big. The workhorse. --- */
+.p-statement .title { font-size: 96px; max-width: 1560px; }
+.p-statement .sub { max-width: 1400px; color: inherit; opacity: .85; }
+
+/* --- Cards: exactly three parallel things, a heading + about a line each --- */
+.cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 36px; margin-top: 12px; }
+.card {
+  padding: 40px 36px; border-radius: var(--radius);
+  background: rgba(0, 0, 0, .05);
+  display: flex; flex-direction: column; gap: 14px;
+}
+.surface-ink .card { background: rgba(255, 255, 255, .08); }
+.surface-accent .card { background: rgba(255, 255, 255, .14); }
+.card h3 { font-size: 46px; }
+.card p  { font-size: 32px; line-height: 1.3; opacity: .85; }
+.card .num { font-family: var(--font-mono); font-size: var(--size-eyebrow); color: var(--accent-text); }
+.surface-ink .card .num { color: var(--accent-on-ink); }
+.surface-accent .card .num { color: var(--on-accent); }
+
+/* --- Figure: a real artifact (screenshot, photo, student work) + a caption --- */
+.p-figure { flex-direction: row; align-items: center; gap: 72px; }
+.p-figure .shot {
+  flex: 0 0 60%; height: 100%; max-height: 860px;
+  display: flex; align-items: center; justify-content: center;
+}
+.p-figure .shot img, .p-figure .shot video {
+  max-width: 100%; max-height: 100%; object-fit: contain;
+  border-radius: 14px; box-shadow: 0 18px 50px rgba(0, 0, 0, .18);
+}
+.p-figure .words { display: flex; flex-direction: column; gap: 24px; }
+.placeholder-shot {
+  width: 100%; aspect-ratio: 16 / 10; border-radius: 14px;
+  border: 4px dashed var(--accent); display: grid; place-items: center;
+  font-family: var(--font-mono); font-size: var(--size-small); color: var(--ink-soft);
+}
+
+/* --- Quote: someone else's words, verbatim, with a real attribution --- */
+.p-quote blockquote {
+  margin: 0; font-family: var(--font-display); font-weight: 600;
+  font-size: 72px; line-height: 1.15; max-width: 1500px; text-wrap: balance;
+}
+.p-quote blockquote::before { content: "\201C"; color: var(--accent); }
+.p-quote blockquote::after  { content: "\201D"; color: var(--accent); }
+.surface-ink.p-quote blockquote::before, .surface-ink.p-quote blockquote::after { color: var(--accent-on-ink); }
+.surface-accent.p-quote blockquote::before, .surface-accent.p-quote blockquote::after { color: var(--on-accent); }
+.p-quote cite { font-style: normal; font-size: var(--size-small); opacity: .8; }
+
+/* --- Divider: marks a new section. Big number, short name --- */
+.p-divider .big-num {
+  font-family: var(--font-display); font-weight: 800; font-size: 260px; line-height: .9;
+  color: var(--accent-on-ink);
+}
+.p-divider.surface-paper .big-num { color: var(--accent-text); }
+
+/* --- Steps: a short sequence the audience will do (Your Turn, the map) --- */
+.steps { list-style: none; padding: 0; margin: 12px 0 0; display: grid; gap: 26px; counter-reset: step; }
+.steps li {
+  counter-increment: step; display: grid; grid-template-columns: 84px 1fr; align-items: baseline;
+  font-size: 42px; line-height: 1.25;
+}
+.steps li::before {
+  content: counter(step); font-family: var(--font-display); font-weight: 800; font-size: 60px;
+  color: var(--accent-text);
+}
+.surface-ink .steps li::before { color: var(--accent-on-ink); }
+.surface-accent .steps li::before { color: var(--on-accent); }
+.steps li small { grid-column: 2; display: block; font-size: var(--size-small); opacity: .75; margin-top: 6px; }
+
+/* --- Close: thank you, one QR, the URL typed out underneath --- */
+.p-close { flex-direction: row; align-items: center; justify-content: space-between; gap: 96px; }
+.p-close .words { display: flex; flex-direction: column; gap: 28px; flex: 1; }
+.p-close .qr { flex: 0 0 auto; display: flex; flex-direction: column; align-items: center; gap: 18px; }
+.p-close .qr img, .p-close .qr .qr-slot {
+  width: 400px; height: 400px; background: #fff; padding: 22px; border-radius: 18px;
+  image-rendering: pixelated;
+}
+.p-close .qr .qr-slot {
+  display: grid; place-items: center; color: #555; font-family: var(--font-mono); font-size: 24px; text-align: center;
+}
+.p-close .url { font-family: var(--font-mono); font-size: 30px; }
+
+/* --- Timer: a big clock face for slides that run code (see Live Timer) --- */
+.timer { font-family: var(--font-mono); font-size: 220px; font-weight: 700; line-height: 1; }
+
+/* --- Promises table: abstract promise → the slide that keeps it --- */
+.promises { width: 100%; border-collapse: collapse; font-size: 32px; }
+.promises th { text-align: left; font-family: var(--font-mono); font-size: var(--size-eyebrow); letter-spacing: .1em; text-transform: uppercase; opacity: .7; padding: 0 0 14px; }
+.promises td { padding: 18px 24px 18px 0; border-top: 2px solid rgba(0, 0, 0, .12); vertical-align: top; }
+.surface-ink .promises td { border-top-color: rgba(255, 255, 255, .18); }
+
+/* ==================================================================
+   Slide number badge (stamped by engine/slide-numbers.js)
+   ================================================================== */
+.slide-num-badge {
+  position: absolute; right: 56px; bottom: 44px;
+  font-family: var(--font-mono); font-size: 24px; opacity: .45;
+}
+
+/* Wrap unfinished bits in <span class="todo">TODO …</span> (or use
+   .placeholder-shot for a missing image) so they show up on screen and
+   check.py finds them. */
+.todo { outline: 3px dashed #d4380d; outline-offset: 6px; }
+
+@media (prefers-reduced-motion: reduce) {
+  * { animation: none !important; transition: none !important; }
+}

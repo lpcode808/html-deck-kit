@@ -1,0 +1,152 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<meta name="robots" content="noindex, nofollow" />
+<title>Slide Patterns</title>
+<link rel="stylesheet" href="theme.css" />
+<script type="application/json" id="speaker-notes">[]</script>
+<style>
+  /* Only for this gallery: a tag naming the pattern on each slide. */
+  .pattern-tag {
+    position: absolute; left: 56px; top: 64px;
+    font: 600 22px/1 var(--font-mono); padding: 10px 16px; border-radius: 999px;
+    background: var(--highlight); color: var(--ink);
+  }
+</style>
+</head>
+<body>
+<!--
+  The pattern gallery. Not your talk: a menu. Every slide here uses only
+  classes from theme.css, so it re-themes when you change your tokens.
+  To use a pattern, copy its <section> into index.html and rewrite the words.
+-->
+<deck-stage width="1920" height="1080" no-rail>
+
+  <section data-screen-label="Title" data-slide-num="hidden" class="surface-ink p-title">
+    <p class="eyebrow">Event name · Month 2026</p>
+    <h1 class="hero">A title that sounds like you talking</h1>
+    <p class="sub">One line of promise: what the room leaves with</p>
+    <p class="byline">Your Name · Your role</p>
+    <span class="pattern-tag">p-title · surface-ink</span>
+  </section>
+
+  <section data-screen-label="Statement" class="surface-paper p-statement">
+    <p class="eyebrow">Orientation, small</p>
+    <h2 class="title">Then one claim, big, in the words you'd say out loud</h2>
+    <p class="sub">Then a little support. Everything else goes in the notes.</p>
+    <span class="pattern-tag">p-statement · the workhorse</span>
+  </section>
+
+  <section data-screen-label="Cards" class="surface-alt">
+    <p class="eyebrow">Three parallel things</p>
+    <h2 class="title">Cards only when the ideas are truly separate</h2>
+    <div class="cards">
+      <div class="card"><span class="num">01</span><h3>A heading</h3><p>About a line, no more</p></div>
+      <div class="card"><span class="num">02</span><h3>Same shape</h3><p>So the eye compares across</p></div>
+      <div class="card"><span class="num">03</span><h3>Three, not five</h3><p>Two or four? Use a statement</p></div>
+    </div>
+    <span class="pattern-tag">.cards › .card</span>
+  </section>
+
+  <section data-screen-label="Figure" class="surface-paper p-figure">
+    <div class="shot"><div class="placeholder-shot">a real screenshot, photo or artifact</div></div>
+    <div class="words">
+      <p class="eyebrow">Evidence</p>
+      <h2 class="title">Real artifacts beat mockups</h2>
+      <p class="small">Source, date. Crop out anything private.</p>
+    </div>
+    <span class="pattern-tag">p-figure</span>
+  </section>
+
+  <section data-screen-label="Quote" class="surface-ink p-quote">
+    <blockquote>Someone else's words, verbatim, with a period if they used one.</blockquote>
+    <cite>Real Name, where and when they said it</cite>
+    <span class="pattern-tag">p-quote</span>
+  </section>
+
+  <section data-screen-label="Divider" class="surface-ink p-divider">
+    <span class="big-num">2</span>
+    <h2 class="title">A new part starts</h2>
+    <span class="pattern-tag">p-divider</span>
+  </section>
+
+  <section data-screen-label="Steps" class="surface-alt">
+    <p class="eyebrow">Your turn · 5 minutes</p>
+    <h2 class="title">Steps people will actually do</h2>
+    <ol class="steps">
+      <li>Open the links page<small>The QR is on the next slide too</small></li>
+      <li>Paste the starter prompt</li>
+      <li>Change one thing and run it again</li>
+    </ol>
+    <p class="small">Rather watch? That counts.</p>
+    <span class="pattern-tag">ol.steps</span>
+  </section>
+
+  <section data-screen-label="Live Timer" class="surface-paper p-statement" data-timer="300">
+    <p class="eyebrow">Slides that run code</p>
+    <div class="timer" data-no-edit>5:00</div>
+    <p class="sub">This counts down only while its slide is showing. Press R to restart it.</p>
+    <span class="pattern-tag">slidechange · data-timer</span>
+  </section>
+
+  <section data-screen-label="Suggestion" class="surface-paper p-statement" data-sg="S1" data-sg-kind="edit" data-sg-note="Shorter title, so it fits on one line">
+    <p class="eyebrow">How the agent proposes changes</p>
+    <h2 class="title"><del class="sg">Here is a much longer title that wraps</del> <ins class="sg">A shorter title</ins></h2>
+    <p class="sub">Press S to step through suggestions, M to preview them accepted. Then tell the agent: accept, tweak or reject.</p>
+    <span class="pattern-tag">data-sg · ins.sg · del.sg</span>
+  </section>
+
+  <section data-screen-label="Close" class="surface-accent p-close">
+    <div class="words">
+      <p class="eyebrow">Take it with you</p>
+      <h2 class="hero">Thank you</h2>
+      <p class="sub">Name · email or handle</p>
+    </div>
+    <div class="qr">
+      <div class="qr-slot">big QR code,<br />one only</div>
+      <span class="url">short.url/typed-out</span>
+    </div>
+    <span class="pattern-tag">p-close · surface-accent</span>
+  </section>
+
+  <section data-screen-label="What I Promised" data-slide-num="A1" class="surface-paper">
+    <p class="eyebrow">Backup · the abstract, checked</p>
+    <h2 class="title" style="font-size: 64px;">What I promised, and where it happens</h2>
+    <table class="promises">
+      <tr><th>The abstract says</th><th>Where it happens</th></tr>
+      <tr><td>"Leave with a working prototype"</td><td>Your Turn</td></tr>
+      <tr><td>"See examples across disciplines"</td><td>Part 2</td></tr>
+    </table>
+    <span class="pattern-tag">table.promises · appendix A1</span>
+  </section>
+
+</deck-stage>
+
+<script src="engine/deck-stage.js"></script>
+<script src="engine/slide-numbers.js"></script>
+<script src="engine/slide-search.js" defer></script>
+<script src="engine/suggest.js" defer></script>
+<script>
+  // The interactive pattern: listen for slidechange, run only on your slide.
+  (function () {
+    var tick = null;
+    function fmt(s) { return Math.floor(s / 60) + ':' + String(s % 60).padStart(2, '0'); }
+    document.querySelector('deck-stage').addEventListener('slidechange', function (e) {
+      clearInterval(tick);
+      var slide = e.detail.slide;
+      if (!slide || !slide.dataset.timer) return;
+      var left = Number(slide.dataset.timer);
+      var face = slide.querySelector('.timer');
+      face.textContent = fmt(left);
+      tick = setInterval(function () {
+        left = Math.max(0, left - 1);
+        face.textContent = fmt(left);
+        if (!left) clearInterval(tick);
+      }, 1000);
+    });
+  })();
+</script>
+</body>
+</html>
