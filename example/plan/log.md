@@ -1,5 +1,12 @@
 # Session log (example)
 
+## Build session 3: effects
+
+- Picked from effects.html: clock on a new Hello slide, typewriter on the
+  Hook, stagger on the three habits, steps on Getting Started, timer on
+  Live Timer, magic keys for confetti on Thanks. One effect per slide.
+- New Effects Menu slide links to effects.html.
+
 ## Build session 2
 
 - Added the Starter and Suggestions slides with real screenshots, the Live

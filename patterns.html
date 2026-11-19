@@ -4,6 +4,7 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
 <meta name="robots" content="noindex, nofollow" />
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Crect width='16' height='16' rx='3' fill='%2317191e'/%3E%3Crect x='3' y='4' width='10' height='7' rx='1' fill='%23ffe27a'/%3E%3C/svg%3E" />
 <title>Slide Patterns</title>
 <link rel="stylesheet" href="theme.css" />
 <script type="application/json" id="speaker-notes">[]</script>
@@ -84,17 +85,17 @@
     <span class="pattern-tag">ol.steps</span>
   </section>
 
-  <section data-screen-label="Live Timer" class="surface-paper p-statement" data-timer="300">
+  <section data-screen-label="Live Timer" class="surface-paper p-statement">
     <p class="eyebrow">Slides that run code</p>
-    <div class="timer" data-no-edit>5:00</div>
-    <p class="sub">This counts down only while its slide is showing. Press R to restart it.</p>
-    <span class="pattern-tag">slidechange · data-timer</span>
+    <div class="timer" data-fx="timer" data-seconds="300" data-no-edit>5:00</div>
+    <p class="sub">Counts down only while its slide is showing. Twelve more effects in effects.html</p>
+    <span class="pattern-tag">data-fx="timer" · engine/effects.js</span>
   </section>
 
   <section data-screen-label="Suggestion" class="surface-paper p-statement" data-sg="S1" data-sg-kind="edit" data-sg-note="Shorter title, so it fits on one line">
     <p class="eyebrow">How the agent proposes changes</p>
     <h2 class="title"><del class="sg">Here is a much longer title that wraps</del> <ins class="sg">A shorter title</ins></h2>
-    <p class="sub">Press S to step through suggestions, M to preview them accepted. Then tell the agent: accept, tweak or reject.</p>
+    <p class="sub">Press S to step through suggestions, P to preview them accepted. Then tell the agent: accept, tweak or reject.</p>
     <span class="pattern-tag">data-sg · ins.sg · del.sg</span>
   </section>
 
@@ -128,25 +129,6 @@
 <script src="engine/slide-numbers.js"></script>
 <script src="engine/slide-search.js" defer></script>
 <script src="engine/suggest.js" defer></script>
-<script>
-  // The interactive pattern: listen for slidechange, run only on your slide.
-  (function () {
-    var tick = null;
-    function fmt(s) { return Math.floor(s / 60) + ':' + String(s % 60).padStart(2, '0'); }
-    document.querySelector('deck-stage').addEventListener('slidechange', function (e) {
-      clearInterval(tick);
-      var slide = e.detail.slide;
-      if (!slide || !slide.dataset.timer) return;
-      var left = Number(slide.dataset.timer);
-      var face = slide.querySelector('.timer');
-      face.textContent = fmt(left);
-      tick = setInterval(function () {
-        left = Math.max(0, left - 1);
-        face.textContent = fmt(left);
-        if (!left) clearInterval(tick);
-      }, 1000);
-    });
-  })();
-</script>
+<script src="engine/effects.js" defer></script>
 </body>
 </html>

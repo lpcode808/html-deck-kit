@@ -30,12 +30,13 @@ The agent adds new questions here as the talk takes shape.
 - **Q12. What fonts?** One for titles, one for everything else, or "system fonts are fine." They get downloaded into `fonts/` so the deck works without wifi.
 - **Q13. Any logo or mark that needs to appear, and where?**
 - **Q14. Anything to avoid?** Colors, imagery, words, tone.
+- **Q15. Open `effects.html` and press around. Any effects you liked, and for which slides?** (Recommended: one or two, where they make a point. Magic keys if you like a bit of theater.)
 
 ## Round 4: logistics (closer to the day)
 
-- **Q15. Where do attendees get the links afterward?** One page, one QR, typed-out URL under it.
-- **Q16. Whose laptop presents? Is there a clicker? Will there be wifi?**
-- **Q17. Should this deck be public at a URL, or stay a file and a PDF?**
+- **Q16. Where do attendees get the links afterward?** One page, one QR, typed-out URL under it.
+- **Q17. Whose laptop presents? Is there a clicker? Will there be wifi?**
+- **Q18. Should this deck be public at a URL, or stay a file and a PDF?**
 
 ## Asked along the way
 

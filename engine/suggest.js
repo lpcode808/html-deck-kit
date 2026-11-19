@@ -12,7 +12,7 @@
  *   (inline marks may also carry data-sg="S1" to tie them to a slide)
  *
  * Keys:  S  next slide with a suggestion   (Shift+S: previous)
- *        M  marks on/off: off shows the slide as it would read if you
+ *        P  preview on/off: shows the slide as it would read if you
  *           accepted everything (deleted words gone, new words plain)
  * The little pill at top right counts what's open. Nothing here changes
  * the file; accepting means telling the agent, and it cleans up the marks.
@@ -63,7 +63,7 @@
     function label() {
       var off = document.documentElement.hasAttribute('data-sg-off');
       pill.textContent = marked.length + ' slide' + (marked.length === 1 ? '' : 's') +
-        ' with suggestions · S next · M ' + (off ? 'marks on' : 'preview accepted');
+        ' with suggestions · S next · P ' + (off ? 'show marks' : 'preview accepted');
     }
     label();
     pill.addEventListener('click', function () { step(1); });
@@ -86,7 +86,7 @@
       if (t && (t.isContentEditable || /^(INPUT|TEXTAREA|SELECT)$/.test(t.tagName))) return;
       if (document.documentElement.hasAttribute('data-deck-edit')) return;
       if (e.key === 's' || e.key === 'S') { step(e.shiftKey ? -1 : 1); e.preventDefault(); }
-      else if (e.key === 'm' || e.key === 'M') {
+      else if (e.key === 'p' || e.key === 'P') {
         document.documentElement.toggleAttribute('data-sg-off');
         label();
         e.preventDefault();

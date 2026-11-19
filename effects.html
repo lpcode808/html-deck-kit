@@ -1,0 +1,287 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<meta name="robots" content="noindex, nofollow" />
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Crect width='16' height='16' rx='3' fill='%2317191e'/%3E%3Crect x='3' y='4' width='10' height='7' rx='1' fill='%23ffe27a'/%3E%3C/svg%3E" />
+<title>Effects Menu</title>
+<link rel="stylesheet" href="theme.css" />
+<script type="application/json" id="speaker-notes">[
+  "The effects menu. Every slide is a live demo of one effect, with the sentence to give your agent underneath.",
+  "Click any effect to jump to it, or keep pressing the right arrow.",
+  "stagger: the children of one element arrive one after another. Good for three cards or a short list.",
+  "steps: the list waits for your clicker. Right arrow reveals the next line; left takes one back. Once everything is out, right arrow moves to the next slide.",
+  "typewriter: plain text types itself. Use it once in a talk, on the line you want people to read slowly.",
+  "scramble: text decodes from random letters. A reveal, a code, a twist.",
+  "count: a number counts up from zero. Use your real number; this one is made up and says so.",
+  "pop: something arrives after a beat, with a bounce. A punchline, an answer, a 'yes'.",
+  "mark: highlights sweep in behind the words wrapped in .mark.",
+  "zoom: a slow push-in on a photo or screenshot. Wrap the image in the element that has data-fx.",
+  "reveal: blurred until you click it. Let the room guess first.",
+  "flip: cards with a front and a back turn over when you click them.",
+  "timer: counts down while the slide is up and stops when you leave.",
+  "clock: shows the viewer's own time. Proof the slide is alive.",
+  "Magic keys: press them any time during a talk. They sit on top of the slide and never change it. X clears everything.",
+  "Anything you can describe, an agent can build. engine/effects.js is the model to copy.",
+  "The rules every effect here follows. Worth keeping for anything new you add."
+]</script>
+<style>
+  /* Only for this menu: the "say to your agent" box and the key chips. */
+  .say {
+    position: absolute; left: var(--pad-x); right: var(--pad-x); bottom: 40px;
+    display: flex; align-items: center; gap: 22px;
+    padding: 16px 18px 16px 26px; border-radius: 16px;
+    background: rgba(0, 0, 0, .06);
+  }
+  .surface-ink .say, .surface-accent .say { background: rgba(255, 255, 255, .1); }
+  .say b {
+    font-family: var(--font-mono); font-size: 18px; font-weight: 600;
+    letter-spacing: .12em; text-transform: uppercase; opacity: .7; white-space: nowrap;
+  }
+  .say code { flex: 1; font-family: var(--font-mono); font-size: 25px; line-height: 1.35; }
+  .say button {
+    font: 600 22px var(--font-body); padding: 12px 22px; border-radius: 12px; cursor: pointer;
+    border: 2px solid currentColor; background: transparent; color: inherit;
+  }
+  .say button[data-done] { background: var(--highlight); color: var(--ink); border-color: var(--highlight); }
+  .hint { font-family: var(--font-mono); font-size: 24px; opacity: .65; }
+
+  .menu { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; margin-top: 12px; }
+  .menu button {
+    font: 700 32px var(--font-display); text-align: left; padding: 26px 28px; border-radius: 16px; cursor: pointer;
+    border: 0; background: rgba(0, 0, 0, .06); color: inherit;
+  }
+  .menu button small { display: block; font: 400 22px var(--font-body); opacity: .7; margin-top: 6px; }
+  .menu button:hover { background: var(--highlight); color: var(--ink); }
+
+  .keys { display: grid; grid-template-columns: repeat(5, 1fr); gap: 18px; margin-top: 8px; }
+  .keys div { display: flex; align-items: center; gap: 16px; font-size: 30px; }
+  .keys kbd {
+    min-width: 64px; padding: 10px 14px; border-radius: 12px; text-align: center;
+    font: 700 30px var(--font-mono); background: var(--on-ink); color: var(--ink);
+    box-shadow: 0 5px 0 rgba(255, 255, 255, .25);
+  }
+  .zoom-frame { width: 100%; aspect-ratio: 16 / 10; box-shadow: 0 18px 50px rgba(0, 0, 0, .18); }
+  .flip-row .card { min-height: 300px; }
+  .flip-row .card .front p, .flip-row .card .back p { font-size: 34px; }
+  .flip-row .card .back { color: var(--accent-text); }
+</style>
+</head>
+<body>
+<!--
+  The effects menu. Each slide shows one effect from engine/effects.js
+  (or the magic keys from engine/magic-keys.js) and the sentence to give
+  your agent. Uses theme.css, so it re-themes with your colors.
+-->
+<deck-stage width="1920" height="1080" no-rail>
+
+  <section data-screen-label="Effects Menu" data-slide-num="hidden" class="surface-ink p-title">
+    <p class="eyebrow">The effects menu</p>
+    <h1 class="hero">Every slide in here is alive. Go ahead, poke it</h1>
+    <p class="sub">Find an effect you like, copy the line under it, paste it to your agent</p>
+    <p class="byline">→ to start · G to see them all · ? for the secret keys</p>
+  </section>
+
+  <section data-screen-label="Menu" class="surface-paper">
+    <p class="eyebrow">Today's specials</p>
+    <h2 class="title">Pick one, or keep pressing →</h2>
+    <div class="menu" data-no-edit>
+      <button data-go="Stagger">stagger<small>arrive one by one</small></button>
+      <button data-go="Steps">steps<small>wait for your click</small></button>
+      <button data-go="Typewriter">typewriter<small>type it out</small></button>
+      <button data-go="Scramble">scramble<small>decode the words</small></button>
+      <button data-go="Count">count<small>a number climbs</small></button>
+      <button data-go="Pop">pop<small>the punchline lands</small></button>
+      <button data-go="Mark">mark<small>highlighter sweep</small></button>
+      <button data-go="Zoom">zoom<small>slow push-in</small></button>
+      <button data-go="Reveal">reveal<small>blurred till clicked</small></button>
+      <button data-go="Flip">flip<small>cards turn over</small></button>
+      <button data-go="Timer">timer<small>a live countdown</small></button>
+      <button data-go="Clock">clock<small>knows your time</small></button>
+      <button data-go="Magic Keys">magic keys<small>confetti and friends</small></button>
+      <button data-go="Make Your Own">your own<small>describe it</small></button>
+    </div>
+  </section>
+
+  <section data-screen-label="Stagger" class="surface-alt">
+    <p class="eyebrow">Effect · stagger</p>
+    <h2 class="title">These cards walked in one at a time</h2>
+    <div class="cards" data-fx="stagger">
+      <div class="card"><span class="num">01</span><h3>Me first</h3><p>Always punctual</p></div>
+      <div class="card"><span class="num">02</span><h3>Then me</h3><p>Right on cue</p></div>
+      <div class="card"><span class="num">03</span><h3>Me, finally</h3><p>Fashionably late</p></div>
+    </div>
+    <p class="hint">Missed it? Press R</p>
+    <div class="say" data-no-edit><b>Say to your agent</b><code>Use the stagger effect from effects.html on the cards on my Promise slide.</code><button type="button">Copy</button></div>
+  </section>
+
+  <section data-screen-label="Steps" class="surface-paper">
+    <p class="eyebrow">Effect · steps</p>
+    <h2 class="title">Press → and I'll tell you a secret, one line at a time</h2>
+    <ol class="steps" data-fx="steps">
+      <li>This slide is a web page</li>
+      <li>Web pages can wait for you</li>
+      <li>So this list waited for you<small>← takes one back. Clickers work too</small></li>
+    </ol>
+    <div class="say" data-no-edit><b>Say to your agent</b><code>Make the list on my Your Turn slide appear one item per click (steps effect from effects.html).</code><button type="button">Copy</button></div>
+  </section>
+
+  <section data-screen-label="Typewriter" class="surface-ink p-statement">
+    <p class="eyebrow">Effect · typewriter</p>
+    <h2 class="title" data-fx="typewriter">I'm typing this live, so please don't read ahead</h2>
+    <p class="hint">R types it again</p>
+    <div class="say" data-no-edit><b>Say to your agent</b><code>Make my Hook title type itself out (typewriter effect from effects.html).</code><button type="button">Copy</button></div>
+  </section>
+
+  <section data-screen-label="Scramble" class="surface-paper p-statement">
+    <p class="eyebrow">Effect · scramble</p>
+    <h2 class="title" data-fx="scramble">Decoding the secret message for you</h2>
+    <p class="sub">Good for a reveal, a password, a plot twist</p>
+    <div class="say" data-no-edit><b>Say to your agent</b><code>Make the big line on my Twist slide decode itself (scramble effect from effects.html).</code><button type="button">Copy</button></div>
+  </section>
+
+  <section data-screen-label="Count" class="surface-alt p-statement">
+    <p class="eyebrow">Effect · count</p>
+    <p class="hero" data-fx="count" style="font-size: 200px; font-weight: 800; font-family: var(--font-display); line-height: 1;">1,000,000</p>
+    <p class="sub">slides you've sat through this year (a made-up number, counted up for drama)</p>
+    <div class="say" data-no-edit><b>Say to your agent</b><code>Make the number on my Results slide count up (count effect from effects.html). Use our real number.</code><button type="button">Copy</button></div>
+  </section>
+
+  <section data-screen-label="Pop" class="surface-paper p-statement">
+    <p class="eyebrow">Effect · pop</p>
+    <h2 class="title">Wait for it…</h2>
+    <p class="hero" data-fx="pop" data-fx-delay="1600" style="font-size: 180px; font-weight: 800; font-family: var(--font-display); color: var(--accent-text);">Ta-da</p>
+    <div class="say" data-no-edit><b>Say to your agent</b><code>Hold back the punchline on my Close slide and pop it in after a beat (pop effect from effects.html).</code><button type="button">Copy</button></div>
+  </section>
+
+  <section data-screen-label="Mark" class="surface-paper p-statement">
+    <p class="eyebrow">Effect · mark</p>
+    <h2 class="title" data-fx="mark">Highlight the <span class="mark">one word</span> that <span class="mark">matters</span></h2>
+    <p class="sub">The highlighter waits until you're looking</p>
+    <div class="say" data-no-edit><b>Say to your agent</b><code>Highlight the key phrase on my Claim slide with the mark effect from effects.html.</code><button type="button">Copy</button></div>
+  </section>
+
+  <section data-screen-label="Zoom" class="surface-alt p-figure">
+    <div class="shot"><div class="zoom-frame" data-fx="zoom"><img src="example/assets/starter-grid.png" alt="The starter deck in grid view" /></div></div>
+    <div class="words">
+      <p class="eyebrow">Effect · zoom</p>
+      <h2 class="title">A slow push-in, like a documentary</h2>
+      <p class="small">Works on any photo or screenshot</p>
+    </div>
+    <div class="say" data-no-edit><b>Say to your agent</b><code>Give the photo on my Story slide a slow zoom (zoom effect from effects.html).</code><button type="button">Copy</button></div>
+  </section>
+
+  <section data-screen-label="Reveal" class="surface-alt p-statement">
+    <p class="eyebrow">Effect · reveal</p>
+    <h2 class="title">Guess first, then click the blurry bit</h2>
+    <p class="lede" data-fx="reveal">You guessed it: this whole menu is one HTML file and one script.</p>
+    <div class="say" data-no-edit><b>Say to your agent</b><code>Blur the answer on my Quiz slide until I click it (reveal effect from effects.html).</code><button type="button">Copy</button></div>
+  </section>
+
+  <section data-screen-label="Flip" class="surface-paper">
+    <p class="eyebrow">Effect · flip</p>
+    <h2 class="title">Three myths. Click a card to flip it</h2>
+    <div class="cards flip-row">
+      <div class="card" data-fx="flip"><div class="front"><span class="num">MYTH</span><p>HTML slides need a developer</p></div><div class="back"><span class="num">ACTUALLY</span><p>They need an agent and a few answers</p></div></div>
+      <div class="card" data-fx="flip"><div class="front"><span class="num">MYTH</span><p>It won't work without wifi</p></div><div class="back"><span class="num">ACTUALLY</span><p>Everything loads from the folder</p></div></div>
+      <div class="card" data-fx="flip"><div class="front"><span class="num">MYTH</span><p>Animation is hard</p></div><div class="back"><span class="num">ACTUALLY</span><p>This one is a single attribute</p></div></div>
+    </div>
+    <div class="say" data-no-edit><b>Say to your agent</b><code>Turn the three cards on my Myths slide into flip cards with an answer on the back (flip effect from effects.html).</code><button type="button">Copy</button></div>
+  </section>
+
+  <section data-screen-label="Timer" class="surface-ink p-statement">
+    <p class="eyebrow">Effect · timer</p>
+    <div class="timer" data-fx="timer" data-seconds="120">2:00</div>
+    <p class="sub">Turn to a neighbor. This only ticks while the slide is up</p>
+    <div class="say" data-no-edit><b>Say to your agent</b><code>Put a 3-minute countdown on my Your Turn slide (timer effect from effects.html).</code><button type="button">Copy</button></div>
+  </section>
+
+  <section data-screen-label="Clock" class="surface-paper p-statement">
+    <p class="eyebrow">Effect · clock</p>
+    <h2 class="title">It's <span class="mark" data-fx="clock">right now</span> where you are</h2>
+    <p class="sub">A picture of a slide couldn't know that</p>
+    <div class="say" data-no-edit><b>Say to your agent</b><code>Show the local time on my Welcome slide (clock effect from effects.html).</code><button type="button">Copy</button></div>
+  </section>
+
+  <section data-screen-label="Magic Keys" class="surface-ink">
+    <p class="eyebrow">Magic keys · press them any time</p>
+    <h2 class="title">Go on, press C. Nobody's watching</h2>
+    <div class="keys" data-no-edit>
+      <div><kbd>B</kbd>blur</div>
+      <div><kbd>C</kbd>confetti</div>
+      <div><kbd>D</kbd>drumroll</div>
+      <div><kbd>M</kbd>mic drop</div>
+      <div><kbd>O</kbd>bubbles</div>
+      <div><kbd>Q</kbd>shh</div>
+      <div><kbd>U</kbd>curtain</div>
+      <div><kbd>3</kbd>3-min timer</div>
+      <div><kbd>X</kbd>clear it all</div>
+      <div><kbd>?</kbd>the list</div>
+    </div>
+    <p class="hint">They float on top of the slide and never change it. B is handy when you want eyes on you</p>
+    <div class="say" data-no-edit><b>Say to your agent</b><code>Turn on the magic keys (engine/magic-keys.js) in my deck.</code><button type="button">Copy</button></div>
+  </section>
+
+  <section data-screen-label="Make Your Own" class="surface-accent p-statement">
+    <p class="eyebrow">Not on the menu?</p>
+    <h2 class="title">Describe it. Every effect here started as a sentence</h2>
+    <p class="sub">Snow on the winter slide. A map that lights up. A poll the room answers by clapping</p>
+    <div class="say" data-no-edit><b>Say to your agent</b><code>On my Map slide, light up each part as I click through it. Build it like the effects in engine/effects.js.</code><button type="button">Copy</button></div>
+  </section>
+
+  <section data-screen-label="House Rules" class="surface-alt">
+    <p class="eyebrow">House rules</p>
+    <h2 class="title">Every effect here plays nice</h2>
+    <div class="cards" data-fx="stagger">
+      <div class="card"><h3>One per slide</h3><p>Where it makes a point, not everywhere</p></div>
+      <div class="card"><h3>Back means done</h3><p>Arrive backwards and it's already finished</p></div>
+      <div class="card"><h3>Calm by request</h3><p>Reduced motion and print show the end state</p></div>
+    </div>
+    <div class="say" data-no-edit><b>Say to your agent</b><code>Which one or two effects from effects.html fit my talk? Propose them as suggestions on the slides.</code><button type="button">Copy</button></div>
+  </section>
+
+</deck-stage>
+
+<script src="engine/deck-stage.js"></script>
+<script src="engine/slide-numbers.js"></script>
+<script src="engine/slide-search.js" defer></script>
+<script src="engine/effects.js" defer></script>
+<script src="engine/magic-keys.js" defer></script>
+<script>
+  // Menu-only helpers: jump buttons and Copy buttons.
+  (function () {
+    var deck = document.querySelector('deck-stage');
+    function slides() { return Array.prototype.filter.call(deck.children, function (s) { return s.tagName === 'SECTION'; }); }
+    document.addEventListener('click', function (e) {
+      var go = e.target.closest('[data-go]');
+      if (go) {
+        var name = go.getAttribute('data-go');
+        var i = slides().findIndex(function (s) {
+          var l = s.getAttribute('data-screen-label') || '';
+          return l === name || / /.test(l) && l.replace(/^\S+\s/, '') === name;
+        });
+        if (i > -1) deck.goTo(i);
+        go.blur();
+        return;
+      }
+      var btn = e.target.closest('.say button');
+      if (!btn) return;
+      var text = btn.parentNode.querySelector('code').textContent;
+      var done = function () {
+        btn.textContent = 'Copied'; btn.setAttribute('data-done', '');
+        setTimeout(function () { btn.textContent = 'Copy'; btn.removeAttribute('data-done'); }, 1600);
+      };
+      var fallback = function () {
+        var r = document.createRange(); r.selectNodeContents(btn.parentNode.querySelector('code'));
+        var sel = getSelection(); sel.removeAllRanges(); sel.addRange(r);
+        try { document.execCommand('copy'); done(); } catch (err) { btn.textContent = 'Selected: press Ctrl+C'; }
+      };
+      if (navigator.clipboard && window.isSecureContext) navigator.clipboard.writeText(text).then(done, fallback);
+      else fallback();
+      btn.blur();   // so the clicker's next press moves the deck, not the button
+    });
+  })();
+</script>
+</body>
+</html>

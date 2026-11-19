@@ -4,19 +4,22 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
 <meta name="robots" content="noindex, nofollow" />
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Crect width='16' height='16' rx='3' fill='%2317191e'/%3E%3Crect x='3' y='4' width='10' height='7' rx='1' fill='%23ffe27a'/%3E%3C/svg%3E" />
 <title>Example Deck</title>
 <link rel="stylesheet" href="theme.css" />
 <script type="application/json" id="speaker-notes">[
-  "This is a finished example made with the kit: same engine, same layouts, its own colors. Press the right arrow to move through it, G to see every slide.",
-  "Slide apps keep the deck inside their own format. An HTML deck is a text file, so an agent can read it, change many slides at once, and show exactly what changed.",
-  "The three habits the kit runs on. Each one comes back later in the deck.",
-  "That's the whole setup. The agent reads AGENTS.md and takes it from there: a few questions at a time, each with a recommended answer.",
+  "This is a finished example made with the kit: same engine, same layouts, its own colors. It's also showing off: most slides here do something. Press the right arrow to move through it, G to see every slide.",
+  "Breaking the fourth wall on purpose. The clock is the viewer's own time, filled in live by the clock effect.",
+  "Slide apps keep the deck inside their own format. An HTML deck is a text file, so an agent can read it, change many slides at once, and show exactly what changed. The title types itself (typewriter effect).",
+  "The three habits the kit runs on. Each one comes back later in the deck. The cards arrive one at a time (stagger).",
+  "That's the whole setup. The agent reads AGENTS.md and takes it from there: a few questions at a time, each with a recommended answer. Each step waits for a click (steps): right arrow reveals the next one.",
   "This is the real starter deck in grid view. Twelve placeholder slides in the order that has held up in conference rooms, with backup slides after the close.",
   "When the agent wants to add, cut or reword something, it marks the change on the slide itself, like suggestions in a shared doc. You review the real slide and answer in bulk.",
-  "Slides can run code. This timer listens for its slide to appear and stops when you leave. Press R to restart it.",
+  "Slides can run code. This timer runs only while its slide is up (timer effect). Press R to restart it.",
+  "Every effect in this deck is on the menu in effects.html, with the sentence to paste to your agent.",
   "The kit's check script catches leftover TODOs, notes out of step with slides, missing files and faint colors. The PDF is the backup if the projector or laptop fails.",
   "The kit brings the structure; you bring the look and the voice.",
-  "Scan to get the kit. Leave this up through questions.",
+  "Scan to get the kit. Leave this up through questions. Magic keys are on in this deck, so C is confetti.",
   "Backup slides live after the close. Press F to search for one during Q&A.",
   "The example's own abstract (in example/plan/brief.md), checked against where each promise happens."
 ]</script>
@@ -34,20 +37,26 @@
   <section data-screen-label="Title" data-slide-num="hidden" class="surface-ink p-title">
     <p class="eyebrow">An example deck · made with html-deck-kit</p>
     <h1 class="hero">Your slides, as a web page your agent can edit</h1>
-    <p class="sub">How this deck got made, in about ten slides</p>
-    <p class="byline">Press → to start, G to see them all</p>
+    <p class="sub">How this deck got made, in about a dozen slides</p>
+    <p class="byline">Press → to start · G to see every slide · this deck is alive, so poke around</p>
+  </section>
+
+  <section data-screen-label="Hello" class="surface-paper p-statement">
+    <p class="eyebrow">Hi. Yes, you</p>
+    <h2 class="title">It's <span class="mark" data-fx="clock">right now</span> where you are, and this slide just checked</h2>
+    <p class="sub">A picture of a slide couldn't do that. A web page can</p>
   </section>
 
   <section data-screen-label="Hook" class="surface-paper p-statement">
     <p class="eyebrow">The problem</p>
-    <h2 class="title">Your agent can't reach inside a slide app, but it can edit a file</h2>
+    <h2 class="title" data-fx="typewriter">Your agent can't reach inside a slide app, but it can edit a file</h2>
     <p class="sub">So make the deck a file</p>
   </section>
 
   <section data-screen-label="Promise" class="surface-alt">
     <p class="eyebrow">Three habits</p>
     <h2 class="title">What the kit runs on</h2>
-    <div class="cards">
+    <div class="cards" data-fx="stagger">
       <div class="card"><span class="num">01</span><h3>Interview first</h3><p>The agent asks before it builds</p></div>
       <div class="card"><span class="num">02</span><h3>One chunk at a time</h3><p>React to real slides, not plans</p></div>
       <div class="card"><span class="num">03</span><h3>You stay the editor</h3><p>Press E and fix the words yourself</p></div>
@@ -57,11 +66,12 @@
   <section data-screen-label="Getting Started" class="surface-paper">
     <p class="eyebrow">Getting started</p>
     <h2 class="title">Three moves to a first slide</h2>
-    <ol class="steps">
+    <ol class="steps" data-fx="steps">
       <li>Copy the kit into a folder for your talk<small>Download the zip, or "Use this template" on GitHub</small></li>
       <li>Open the folder in your agent and say: "Read AGENTS.md and start the kickoff interview"</li>
       <li>Answer a few questions at a time<small>"recs" accepts its recommendations; "later" skips one</small></li>
     </ol>
+    <p class="small">Press → to reveal each step. This list waits for you</p>
   </section>
 
   <section data-screen-label="The Starter" class="surface-alt p-figure">
@@ -78,14 +88,20 @@
     <div class="words">
       <p class="eyebrow">Suggest, don't surprise</p>
       <h2 class="title">Changes show up on the slide</h2>
-      <p class="small">S steps through them, M previews them accepted, then you reply in bulk</p>
+      <p class="small">S steps through them, P previews them accepted, then you reply in bulk</p>
     </div>
   </section>
 
-  <section data-screen-label="Live Timer" class="surface-ink p-statement" data-timer="180">
+  <section data-screen-label="Live Timer" class="surface-ink p-statement">
     <p class="eyebrow">Slides that run code</p>
-    <div class="timer" data-no-edit>3:00</div>
-    <p class="sub">This counts down only while its slide is showing</p>
+    <div class="timer" data-fx="timer" data-seconds="180" data-no-edit>3:00</div>
+    <p class="sub">Ticking only while you're on this slide. Leave and come back: it starts over</p>
+  </section>
+
+  <section data-screen-label="Effects Menu" class="surface-alt p-statement">
+    <p class="eyebrow">Liked that?</p>
+    <h2 class="title">There's a whole menu: twelve effects and some magic keys</h2>
+    <p class="sub">Each one comes with the sentence to give your agent. <a href="../effects.html">Open the effects menu</a></p>
   </section>
 
   <section data-screen-label="Before the Day" class="surface-alt">
@@ -107,6 +123,7 @@
       <p class="eyebrow">Make your own</p>
       <h2 class="hero">Thank you</h2>
       <p class="sub">Copy the kit and start your own deck</p>
+      <p class="small">Psst: press C. You made it to the end</p>
     </div>
     <div class="qr">
       <img src="assets/qr-repo.png" alt="QR code for the html-deck-kit repository" />
@@ -137,25 +154,7 @@
 <script src="../engine/slide-numbers.js"></script>
 <script src="../engine/slide-search.js" defer></script>
 <script src="../engine/suggest.js" defer></script>
-<script>
-  // Live Timer: runs only while its slide is on screen; R replays it.
-  (function () {
-    var tick = null;
-    function fmt(s) { return Math.floor(s / 60) + ':' + String(s % 60).padStart(2, '0'); }
-    document.querySelector('deck-stage').addEventListener('slidechange', function (e) {
-      clearInterval(tick);
-      var slide = e.detail.slide;
-      if (!slide || !slide.dataset.timer) return;
-      var left = Number(slide.dataset.timer);
-      var face = slide.querySelector('.timer');
-      face.textContent = fmt(left);
-      tick = setInterval(function () {
-        left = Math.max(0, left - 1);
-        face.textContent = fmt(left);
-        if (!left) clearInterval(tick);
-      }, 1000);
-    });
-  })();
-</script>
+<script src="../engine/effects.js" defer></script>
+<script src="../engine/magic-keys.js" defer></script>
 </body>
 </html>

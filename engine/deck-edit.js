@@ -720,7 +720,7 @@
   header .where { font-weight: 700; font-size: 18px; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
   header .count { color: rgba(246,245,241,.6); white-space: nowrap; }
   .timer { margin-left: auto; display: flex; align-items: center; gap: 8px; }
-  .time { font: 600 28px/1 "JetBrains Mono", ui-monospace, Menlo, monospace; font-variant-numeric: tabular-nums; }
+  .time { font: 600 28px/1 ui-monospace, Consolas, Menlo, monospace; font-variant-numeric: tabular-nums; }
   .clock { color: rgba(246,245,241,.6); font-variant-numeric: tabular-nums; white-space: nowrap; }
   button { font: inherit; color: inherit; cursor: pointer; padding: 6px 12px; border-radius: 8px; border: 1px solid rgba(246,245,241,.25); background: rgba(246,245,241,.07); }
   button:hover { background: rgba(246,245,241,.16); }

@@ -75,7 +75,7 @@ react to slides to know what they want.
     data-sg-note="why, in one line"` on the `<section>`;
   - words: `<del class="sg">old</del> <ins class="sg">new</ins>`.
   - Number suggestions S1, S2… per round. Tell them: open the deck, press S
-    to step through, M to preview everything accepted, then reply in bulk
+    to step through, P to preview everything accepted, then reply in bulk
     ("accept all", "S3: tweak, shorter", "reject S5").
   - On their reply, apply the accepted ones, remove every mark, and record
     the decisions in `plan/brief.md` under Locked decisions when they're
@@ -113,6 +113,36 @@ The kit ships neutral grays on purpose. Don't invent a brand.
   drop the files into `fonts/`; log it as waiting on them.
 - **Logos.** Into `assets/`, placed where they ask. Not on every slide
   unless they ask.
+
+## Effects and interactivity
+
+The deck is a web page, so slides can move, react and run things.
+`effects.html` is the menu: every slide there is one live effect plus the
+exact sentence to paste to you ("Use the stagger effect from effects.html
+on my Promise slide").
+
+- **When to bring it up:** once the outline exists (Round 3 in the
+  interview). Ask them to open `effects.html`, press around, and tell you
+  which ones they liked and for which slides. Don't add effects nobody
+  asked for; offer them as suggestions if one would make a point.
+- **Adding one:** uncomment the `engine/effects.js` script tag at the
+  bottom of `index.html` (once), then put `data-fx="name"` on the element
+  the way the menu slide does. Copy the menu slide's markup shape (a flip
+  card needs `.front` and `.back`; zoom wraps the image).
+- **Magic keys** (B blur, C confetti, D drumroll, M mic drop, O bubbles,
+  Q shh, U curtain, 1–9 timers, X clear): uncomment
+  `engine/magic-keys.js`. Tell them it takes over the number keys, so
+  "press 4 to jump to slide 4" stops working.
+- **Something not on the menu:** build it as slide code in `index.html` (a
+  `<script>` that listens for `slidechange`), following how
+  `engine/effects.js` does it. Keep its rules: arriving backwards shows the
+  finished state, R replays, reduced motion and print show the end state,
+  and nothing keeps running after the slide is gone.
+- **Taste:** one effect per slide at most, where it makes a point. Every
+  slide must read fine in its finished state, because that's what the PDF
+  and the people in the back will see. Check forward, backward and after R.
+- `steps` hold the → key until every item is out. Make sure the presenter
+  knows, or they'll think the clicker stopped working.
 
 ## Rehearsal: the edit loop
 
@@ -224,6 +254,7 @@ Thanks with one QR → backup slides and Appendix after the close.
 | `index.html` | The deck. Each `<section>` is a slide, in order | You, and the presenter via E |
 | `theme.css` | Color and font tokens (top), slide patterns (below) | You |
 | `patterns.html` | Gallery of every pattern, re-themed live | You, when adding a pattern |
+| `effects.html` | Menu of live effects, each with the sentence to paste to you | Nobody, normally |
 | `plan/brief.md` | The facts and locked decisions | You, from their answers |
 | `plan/interview.md` | Question bank and their answers | You |
 | `plan/outline.md` | Beats, clock, cut order, parking lot | You, with their OK |
@@ -254,9 +285,9 @@ Thanks with one QR → backup slides and Appendix after the close.
 - `no-rail` on `<deck-stage>` hides the thumbnail rail while presenting.
   Remove it while building if the presenter likes the rail.
 - Slide code listens for `slidechange` on `<deck-stage>`
-  (`e.detail.slide`, `e.detail.index`); see the Live Timer in
-  `patterns.html`. Hidden slides stay in the page, so videos and inputs
-  keep their state.
+  (`e.detail.slide`, `e.detail.index`, `e.detail.previousIndex`,
+  `e.detail.reason`); `engine/effects.js` is the worked example. Hidden
+  slides stay in the page, so videos and inputs keep their state.
 - Everything the deck loads lives in this folder. No CDNs, no build step,
   no npm. Double-clicking `index.html` works.
 - Don't edit `engine/` to fix one slide. Style the slide instead. Comments
@@ -275,7 +306,8 @@ Thanks with one QR → backup slides and Appendix after the close.
 | E | Edit text in place; the toolbar has Notes, Presenter, Save, Copy changes |
 | L | Laser pointer |
 | R | Replay the current slide's animation |
-| S / M | Step through suggestions / preview them accepted (only when there are some) |
+| S / P | Step through suggestions / preview them accepted (only when there are some) |
+| B C D M O Q U X ? | Magic keys, only when `engine/magic-keys.js` is on: blur, confetti, drumroll, mic drop, bubbles, shh, curtain, clear all, list. Then 1–9 start a timer instead of jumping |
 | Ctrl+P | Print: one page per slide, Save as PDF for the backup |
 
 ## If the presenter uses git

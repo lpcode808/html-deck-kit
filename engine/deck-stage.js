@@ -1133,6 +1133,9 @@
       tzFwd.className = 'tapzone tapzone--fwd';
       tzBack.addEventListener('click', this._onTapBack);
       tzFwd.addEventListener('click', this._onTapForward);
+      // The middle third doesn't move the deck, but a tap there on a button,
+      // link or flip card should still reach it.
+      tzMid.addEventListener('click', (e) => this._forwardTapToInteractive(e));
       tapzones.append(tzBack, tzMid, tzFwd);
 
       // Overlay: compact, solid black, with clickable controls.

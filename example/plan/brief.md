@@ -38,4 +38,5 @@ interview is done. The talk is the kit explaining itself.
 ## Locked decisions
 
 - Real screenshots of the kit, not mockups.
-- The Live Timer stays: it's the one slide that shows code running.
+- The Live Timer stays: it's the clearest slide that shows code running.
+- At most one effect per slide; every slide reads fine finished.

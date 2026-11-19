@@ -15,6 +15,7 @@ Checks:
   offline    scripts, styles, fonts or images loaded from the internet
   files      local files the deck points at that don't exist
   alt        images without alt text
+  effects    data-fx names that don't exist, or effects.js not loaded
   contrast   text color pairs from theme.css under 4.5:1
 """
 from __future__ import annotations
@@ -51,6 +52,8 @@ class Deck(HTMLParser):
         self.notes_raw = None
         self._in_notes = False
         self.refs = []            # (attr, value, label)
+        self.fx = []              # (names, label)
+        self.scripts = []
         self.imgs_no_alt = []
 
     def handle_starttag(self, tag, attrs):
@@ -73,6 +76,10 @@ class Deck(HTMLParser):
                 self.cur["sg"] = True
             if tag in {"h1", "h2", "h3"} or cls & self.HEADING_CLASSES:
                 self.capture.append([tag, self.depth, []])
+        if a.get("data-fx"):
+            self.fx.append((a["data-fx"], label))
+        if tag == "script" and a.get("src"):
+            self.scripts.append(a["src"])
         if tag == "img" and not a.get("alt"):
             self.imgs_no_alt.append((a.get("src") or "?", label))
         for attr in ("src", "href", "poster"):
@@ -133,6 +140,10 @@ def ratio(a, b):
     hi, lo = max(la, lb), min(la, lb)
     return (hi + 0.05) / (lo + 0.05)
 
+
+# The names engine/effects.js knows (see effects.html).
+FX_NAMES = {"stagger", "steps", "typewriter", "scramble", "count", "pop", "mark",
+            "zoom", "reveal", "flip", "timer", "clock"}
 
 # (text token, background token, what it's used for)
 # 4.5:1 is the floor for text (WCAG AA). 3:1 is the floor for non-text marks
@@ -266,6 +277,17 @@ def main():
         report("WARN", "alt", "images without alt text: " + "; ".join(f"{w}: {s}" for s, w in p.imgs_no_alt))
     else:
         report("ok", "alt", "every image has alt text")
+
+    # effects
+    if p.fx:
+        unknown = [f"{w}: {n}" for names, w in p.fx for n in names.split() if n not in FX_NAMES]
+        loaded = any(s.split("?")[0].endswith("effects.js") for s in p.scripts)
+        if not loaded:
+            report("FAIL", "effects", "slides use data-fx but engine/effects.js isn't loaded (uncomment its script tag)")
+        elif unknown:
+            report("WARN", "effects", "unknown effect names: " + "; ".join(unknown))
+        else:
+            report("ok", "effects", f"{len(p.fx)} effects, all known")
 
     # contrast
     check_contrast(css)

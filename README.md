@@ -2,6 +2,7 @@
 
 **See it first:** [the example deck](https://lpcode808.github.io/html-deck-kit/example/)
 (a finished deck made with this kit) · [every slide layout](https://lpcode808.github.io/html-deck-kit/patterns.html)
+· [the effects menu](https://lpcode808.github.io/html-deck-kit/effects.html) (poke everything)
 
 **Get it:** green **Code** button → **Download ZIP**, or **Use this template**
 if you have a GitHub account. Or tell your agent: *"Copy
@@ -64,9 +65,17 @@ shows every slide layout the kit has, in your colors.
 | G | See all slides; drag to reorder; right-click to skip one |
 | F | Search for a slide |
 | E | Fix words right on the slide (and write speaker notes) |
-| S, M | When the agent has suggested changes: step through them, preview them accepted |
+| S, P | When the agent has suggested changes: step through them, preview them accepted |
 | H | Back to the start |
 | L | Laser pointer |
+
+## Make it move
+
+Open `effects.html`. Every slide in it is a live effect: cards that walk
+in, a list that waits for your clicker, a headline that types itself, a
+countdown, cards that flip, confetti on a key. Under each one is the exact
+sentence to paste to your agent. Pick one or two you love; a little goes a
+long way.
 
 ## Fix words yourself while you rehearse
 
@@ -101,6 +110,7 @@ to PDF (Ctrl+P → Save as PDF) as a backup.
 | `example/` | A finished example deck. Look, borrow, or delete it |
 | `theme.css` | Your colors and fonts (top of the file) |
 | `patterns.html` | Every slide layout, as a menu |
+| `effects.html` | Every effect, live, with the sentence to give your agent |
 | `plan/` | The agent's notes: the facts, your answers, the outline, a log |
 | `assets/`, `fonts/` | Your images and font files |
 | `engine/`, `scripts/` | The machinery. Leave these be |
@@ -110,4 +120,8 @@ to PDF (Ctrl+P → Save as PDF) as a backup.
 
 Any static host works: Cloudflare Pages, GitHub Pages, Netlify, or a shared
 drive people can download from. Upload the whole folder. An unlisted link is
-not a private one; anyone with the URL can open it.
+not a private one; anyone with the URL can open it. Every page carries a
+"don't index this" tag for search engines (GitHub Pages ignores the
+`_headers` file, but the tag inside each page still works). **Save to
+file** only works on your own computer; online, edits stay in that browser
+until you use **Copy changes**.
