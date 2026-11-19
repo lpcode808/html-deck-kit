@@ -7,6 +7,7 @@
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Crect width='16' height='16' rx='3' fill='%2317191e'/%3E%3Crect x='3' y='4' width='10' height='7' rx='1' fill='%23ffe27a'/%3E%3C/svg%3E" />
 <title>Effects Menu</title>
 <link rel="stylesheet" href="theme.css" />
+<script src="engine/themes.js" data-themes="brutal storybook" data-default-name="Plain"></script>
 <script type="application/json" id="speaker-notes">[
   "The effects menu. Every slide is a live demo of one effect, with the sentence to give your agent underneath.",
   "Click any effect to jump to it, or keep pressing the right arrow.",
@@ -34,9 +35,9 @@
     position: absolute; left: var(--pad-x); right: var(--pad-x); bottom: 40px;
     display: flex; align-items: center; gap: 22px;
     padding: 16px 18px 16px 26px; border-radius: 16px;
-    background: rgba(0, 0, 0, .06);
+    background: color-mix(in srgb, currentColor 7%, transparent);
   }
-  .surface-ink .say, .surface-accent .say { background: rgba(255, 255, 255, .1); }
+  .surface-ink .say, .surface-accent .say { background: color-mix(in srgb, currentColor 11%, transparent); }
   .say b {
     font-family: var(--font-mono); font-size: 18px; font-weight: 600;
     letter-spacing: .12em; text-transform: uppercase; opacity: .7; white-space: nowrap;
@@ -46,22 +47,22 @@
     font: 600 22px var(--font-body); padding: 12px 22px; border-radius: 12px; cursor: pointer;
     border: 2px solid currentColor; background: transparent; color: inherit;
   }
-  .say button[data-done] { background: var(--highlight); color: var(--ink); border-color: var(--highlight); }
+  .say button[data-done] { background: var(--highlight); color: var(--on-highlight, var(--ink)); border-color: var(--highlight); }
   .hint { font-family: var(--font-mono); font-size: 24px; opacity: .65; }
 
   .menu { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; margin-top: 12px; }
   .menu button {
     font: 700 32px var(--font-display); text-align: left; padding: 26px 28px; border-radius: 16px; cursor: pointer;
-    border: 0; background: rgba(0, 0, 0, .06); color: inherit;
+    border: 0; background: color-mix(in srgb, currentColor 7%, transparent); color: inherit;
   }
   .menu button small { display: block; font: 400 22px var(--font-body); opacity: .7; margin-top: 6px; }
-  .menu button:hover { background: var(--highlight); color: var(--ink); }
+  .menu button:hover { background: var(--highlight); color: var(--on-highlight, var(--ink)); }
 
   .keys { display: grid; grid-template-columns: repeat(5, 1fr); gap: 18px; margin-top: 8px; }
   .keys div { display: flex; align-items: center; gap: 16px; font-size: 30px; }
   .keys kbd {
     min-width: 64px; padding: 10px 14px; border-radius: 12px; text-align: center;
-    font: 700 30px var(--font-mono); background: var(--on-ink); color: var(--ink);
+    font: 700 30px var(--font-mono); background: var(--on-ink); color: var(--deep, var(--ink));
     box-shadow: 0 5px 0 rgba(255, 255, 255, .25);
   }
   .zoom-frame { width: 100%; aspect-ratio: 16 / 10; box-shadow: 0 18px 50px rgba(0, 0, 0, .18); }

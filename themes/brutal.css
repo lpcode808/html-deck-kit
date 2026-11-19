@@ -1,0 +1,33 @@
+/* Brutal: black, white, highlighter yellow. Thick borders, hard shadows, no curves.
+   Fonts: Archivo Black (headlines) + Space Grotesk (text) + Space Mono (labels),
+   from Google Fonts, self-hosted in fonts/ under the SIL Open Font License. */
+@font-face { font-family: "Archivo Black"; src: url("fonts/archivo-black/ArchivoBlack.woff2") format("woff2"); font-weight: 400; font-display: swap; }
+@font-face { font-family: "Space Grotesk"; src: url("fonts/space-grotesk/SpaceGrotesk.woff2") format("woff2"); font-weight: 400 700; font-display: swap; }
+@font-face { font-family: "Space Mono"; src: url("fonts/space-mono/SpaceMono-Regular.woff2") format("woff2"); font-weight: 400; font-display: swap; }
+@font-face { font-family: "Space Mono"; src: url("fonts/space-mono/SpaceMono-Bold.woff2") format("woff2"); font-weight: 700; font-display: swap; }
+
+html[data-theme="brutal"], [data-theme-preview="brutal"] {
+  --paper: #ffffff; --paper-alt: #ffe600;
+  --ink: #0a0a0a; --ink-soft: #2b2b2b; --deep: #0a0a0a; --on-ink: #ffffff;
+  --accent: #1f3cff; --accent-text: #1f3cff; --accent-on-ink: #ffe600; --on-accent: #ffffff;
+  --highlight: #ff8ae2; --on-highlight: #0a0a0a;
+  --font-display: "Archivo Black", Impact, sans-serif;
+  --font-body: "Space Grotesk", system-ui, sans-serif;
+  --font-mono: "Space Mono", ui-monospace, monospace;
+  --radius: 0px; --size-title: 80px; --size-hero: 110px;
+}
+html[data-theme="brutal"] { font-synthesis: none; }
+html[data-theme="brutal"] :is(h1, h2, h3) { font-weight: 400; letter-spacing: -.02em; line-height: 1.02; }
+html[data-theme="brutal"] .eyebrow { align-self: flex-start; padding: 8px 14px; background: var(--ink); color: var(--paper); font-weight: 700; letter-spacing: .08em; }
+html[data-theme="brutal"] .surface-ink .eyebrow { background: var(--accent-on-ink); color: var(--ink); }
+html[data-theme="brutal"] .surface-accent .eyebrow { background: var(--on-accent); color: var(--accent); opacity: 1; }
+html[data-theme="brutal"] .card { background: var(--paper); color: var(--ink); border: 4px solid var(--ink); border-radius: 0; box-shadow: 10px 10px 0 var(--ink); }
+html[data-theme="brutal"] .surface-ink .card { background: var(--deep); color: var(--on-ink); border-color: var(--on-ink); box-shadow: 10px 10px 0 var(--accent-on-ink); }
+html[data-theme="brutal"] .surface-accent .card .num { color: var(--accent-text); }
+html[data-theme="brutal"] .steps li::before { font-family: var(--font-display); }
+html[data-theme="brutal"] .dot-list li::before { border-radius: 0; background: var(--ink); }
+html[data-theme="brutal"] .surface-ink .dot-list li::before { background: var(--accent-on-ink); }
+html[data-theme="brutal"] .p-divider .big-num { color: transparent; -webkit-text-stroke: 5px var(--accent-on-ink); }
+html[data-theme="brutal"] .mark { border-radius: 0; box-shadow: 4px 4px 0 var(--ink); }
+html[data-theme="brutal"] .p-figure .shot img { border-radius: 0; border: 4px solid var(--ink); box-shadow: 14px 14px 0 var(--ink); }
+html[data-theme="brutal"] .p-close .qr img { border-radius: 0; border: 4px solid var(--ink); }

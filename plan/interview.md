@@ -26,7 +26,7 @@ The agent adds new questions here as the talk takes shape.
 
 ## Round 3: look and feel (can wait until the outline exists)
 
-- **Q11. What colors?** Hex codes, a brand guide, a website to sample from, or "decide later." (Recommended: two or three colors plus neutrals.)
+- **Q11. What colors?** Hex codes, a brand guide, a website to sample from, or "decide later." Or start from one of the six looks: open `example/`, `effects.html` or `patterns.html` and press T. (Recommended: two or three colors plus neutrals.)
 - **Q12. What fonts?** One for titles, one for everything else, or "system fonts are fine." They get downloaded into `fonts/` so the deck works without wifi.
 - **Q13. Any logo or mark that needs to appear, and where?**
 - **Q14. Anything to avoid?** Colors, imagery, words, tone.

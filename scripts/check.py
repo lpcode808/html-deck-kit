@@ -16,7 +16,8 @@ Checks:
   files      local files the deck points at that don't exist
   alt        images without alt text
   effects    data-fx names that don't exist, or effects.js not loaded
-  contrast   text color pairs from theme.css under 4.5:1
+  contrast   text color pairs from theme.css under 4.5:1, and the same
+             for every look in themes/ the deck offers
 """
 from __future__ import annotations
 
@@ -158,27 +159,55 @@ PAIRS = [
     ("ink-soft", "paper-alt", "captions on the alternate light slides", 4.5),
     ("accent-text", "paper", "eyebrows and numbers on light slides", 4.5),
     ("accent-text", "paper-alt", "eyebrows on the alternate light slides", 4.5),
-    ("on-ink", "ink", "text on dark slides", 4.5),
-    ("accent-on-ink", "ink", "eyebrows, numbers, quote marks on dark slides", 4.5),
+    ("on-ink", "deep", "text on dark slides", 4.5),
+    ("accent-on-ink", "deep", "eyebrows, numbers, quote marks on dark slides", 4.5),
     ("on-accent", "accent", "text on accent slides", 4.5),
-    ("ink", "highlight", "highlighted words", 4.5),
+    ("on-highlight", "highlight", "highlighted words", 4.5),
     ("accent", "paper", "bullet dots and quote marks on light slides", 3),
     ("accent", "paper-alt", "bullet dots on the alternate light slides", 3),
 ]
 
 
-def check_contrast(css):
-    tokens = dict(re.findall(r"--([\w-]+)\s*:\s*(#(?:[0-9a-fA-F]{6}|[0-9a-fA-F]{3}))(?![0-9a-fA-F])", css))
+# Optional roles fall back to these when a theme leaves them unset.
+FALLBACK = {"deep": "ink", "on-highlight": "ink"}
+TOKEN_RE = r"--([\w-]+)\s*:\s*(#(?:[0-9a-fA-F]{6}|[0-9a-fA-F]{3}))(?![0-9a-fA-F])"
+
+
+def tokens_of(css):
+    return dict(re.findall(TOKEN_RE, re.sub(r"/\*.*?\*/", "", css, flags=re.S)))
+
+
+def check_contrast(tokens, label="contrast", summary=False):
+    rows = []
     for fg, bg, use, need in PAIRS:
-        if fg not in tokens or bg not in tokens:
-            report("WARN", "contrast", f"--{fg} on --{bg}: not a plain #hex, measure it by hand")
+        f = tokens.get(fg) or tokens.get(FALLBACK.get(fg, ""))
+        b = tokens.get(bg) or tokens.get(FALLBACK.get(bg, ""))
+        if not f or not b:
+            report("WARN", label, f"--{fg} on --{bg}: not a plain #hex, measure it by hand")
             continue
-        r = ratio(tokens[fg], tokens[bg])
-        if r >= need:
-            level = "ok"
-        else:
-            level = "WARN" if need < 4.5 else "FAIL"
-        report(level, "contrast", f"{r:4.1f}:1  --{fg} on --{bg} ({use}; needs {need}:1)")
+        r = ratio(f, b)
+        level = "ok" if r >= need else ("WARN" if need < 4.5 else "FAIL")
+        rows.append((level, r, f"{r:4.1f}:1  --{fg} on --{bg} ({use}; needs {need}:1)"))
+    if summary:
+        bad = [row for row in rows if row[0] != "ok"]
+        for level, _, msg in bad:
+            report(level, label, msg)
+        if not bad and rows:
+            low = min(rows, key=lambda row: row[1])
+            report("ok", label, f"all {len(rows)} color pairs pass (lowest {low[1]:.1f}:1)")
+        return
+    for level, _, msg in rows:
+        report(level, label, msg)
+
+
+def themes_used(src):
+    names = []
+    for m in re.finditer(r'data-themes="([^"]*)"', src):
+        names += m.group(1).split()
+    m = re.search(r'<html[^>]*\sdata-theme="([^"]+)"', src)
+    if m:
+        names.append(m.group(1))
+    return list(dict.fromkeys(names))
 
 
 def main():
@@ -290,7 +319,14 @@ def main():
             report("ok", "effects", f"{len(p.fx)} effects, all known")
 
     # contrast
-    check_contrast(css)
+    base = tokens_of(css)
+    check_contrast(base)
+    for name in themes_used(src):
+        tp = ROOT / "themes" / f"{name}.css"
+        if not tp.exists():
+            report("FAIL", "themes", f"themes/{name}.css doesn't exist")
+            continue
+        check_contrast({**base, **tokens_of(tp.read_text(encoding="utf-8"))}, name, summary=True)
 
     print()
     if FAILS:

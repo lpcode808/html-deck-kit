@@ -1,0 +1,31 @@
+/* Storybook: warm cream, rounded everything, sticker cards, sunny accents.
+   Fonts: Fredoka (headlines) + Nunito (text), from Google Fonts,
+   self-hosted in fonts/ under the SIL Open Font License. */
+@font-face { font-family: "Fredoka"; src: url("fonts/fredoka/Fredoka.woff2") format("woff2"); font-weight: 400 700; font-display: swap; }
+@font-face { font-family: "Nunito"; src: url("fonts/nunito/Nunito.woff2") format("woff2"); font-weight: 400 800; font-display: swap; }
+
+html[data-theme="storybook"], [data-theme-preview="storybook"] {
+  --paper: #fff7e8; --paper-alt: #e6f4ec;
+  --ink: #2d2445; --ink-soft: #5b5175; --deep: #3b2d6b; --on-ink: #fff7e8;
+  --accent: #c63f2a; --accent-text: #b23722; --accent-on-ink: #ffd36e; --on-accent: #ffffff;
+  --highlight: #ffd36e; --on-highlight: #2d2445;
+  --font-display: "Fredoka", system-ui, sans-serif;
+  --font-body: "Nunito", system-ui, sans-serif;
+  --radius: 34px; --size-title: 88px; --size-hero: 118px;
+}
+html[data-theme="storybook"] :is(h1, h2, h3) { font-weight: 600; letter-spacing: 0; }
+html[data-theme="storybook"] .surface-paper { background-image: radial-gradient(circle, rgba(45, 36, 69, .07) 3px, transparent 3.5px); background-size: 44px 44px; }
+html[data-theme="storybook"] .eyebrow { font-family: var(--font-display); font-weight: 600; text-transform: none; letter-spacing: .02em; font-size: 32px; }
+html[data-theme="storybook"] .card { background: #ffffff; color: var(--ink); border: 4px solid var(--ink); box-shadow: 0 10px 0 var(--ink); }
+html[data-theme="storybook"] .cards > .card:nth-child(odd) { rotate: -1.2deg; }
+html[data-theme="storybook"] .cards > .card:nth-child(even) { rotate: 1deg; }
+html[data-theme="storybook"] .surface-ink .card { background: #4a3a82; color: var(--on-ink); border-color: #1d1640; box-shadow: 0 10px 0 #1d1640; }
+html[data-theme="storybook"] .steps li::before {
+  width: 64px; height: 64px; border-radius: 50%; display: grid; place-items: center; align-self: center;
+  font-size: 34px; background: var(--accent); color: var(--on-accent);
+}
+html[data-theme="storybook"] .surface-ink .steps li::before { background: var(--accent-on-ink); color: var(--deep); }
+html[data-theme="storybook"] .dot-list li::before { width: 24px; height: 24px; top: .42em; }
+html[data-theme="storybook"] .mark { border-radius: 999px; padding: 0 .3em; }
+html[data-theme="storybook"] .p-figure .shot img { border-radius: 28px; border: 6px solid #ffffff; box-shadow: 0 12px 0 var(--ink); rotate: -1deg; }
+html[data-theme="storybook"] .p-close .qr img { border-radius: 28px; }

@@ -65,6 +65,7 @@ shows every slide layout the kit has, in your colors.
 |---|---|
 | ? | Every key, and what the slide you're on does |
 | V | Under the hood: how this slide is built, ready to copy into an AI chat |
+| T | Switch the look (on the example, effects and layouts pages) |
 | → ← Space | Next, previous |
 | G | See all slides; drag to reorder; right-click to skip one |
 | F | Search for a slide |
@@ -72,6 +73,19 @@ shows every slide layout the kit has, in your colors.
 | S, P | When the agent has suggested changes: step through them, preview them accepted |
 | H | Back to the start |
 | L | Laser pointer |
+
+## Try on a look
+
+The example deck, the effects menu and the layouts page each have a
+**Look** picker at the top left (or press **T**). Six looks ship in
+`themes/`, each with its own colors, typefaces and shapes: **Editorial**,
+**Night Drive**, **Brutal**, **Storybook**, **Terminal** and **Riso Zine**.
+Any of them works on any page: add `?theme=riso` to the address. Like one?
+Tell your agent "start my deck from the Riso Zine look, with my colors."
+
+The typefaces are Google Fonts, downloaded into `themes/fonts/` so they
+work without wifi. They're under the SIL Open Font License, which travels
+with them (each family's `OFL.txt`); the rest of the kit is CC0.
 
 ## Peek under the hood
 
@@ -126,6 +140,7 @@ to PDF (Ctrl+P → Save as PDF) as a backup.
 | `effects.html` | Every effect, live, with the sentence to give your agent |
 | `plan/` | The agent's notes: the facts, your answers, the outline, a log |
 | `assets/`, `fonts/` | Your images and font files |
+| `themes/` | Six ready-made looks and their fonts |
 | `engine/`, `scripts/` | The machinery. Leave these be |
 | `AGENTS.md` | Instructions for your agent (worth a skim) |
 

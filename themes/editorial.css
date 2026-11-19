@@ -1,0 +1,32 @@
+/* Editorial: newsprint cream, serif headlines, hairline rules, one red.
+   Fonts: Fraunces (headlines) + Source Serif 4 (text), from Google Fonts,
+   self-hosted in fonts/ under the SIL Open Font License. */
+@font-face { font-family: "Fraunces"; src: url("fonts/fraunces/Fraunces.woff2") format("woff2"); font-weight: 400 800; font-display: swap; }
+@font-face { font-family: "Source Serif 4"; src: url("fonts/source-serif-4/SourceSerif4.woff2") format("woff2"); font-weight: 400 700; font-display: swap; }
+
+html[data-theme="editorial"], [data-theme-preview="editorial"] {
+  --paper: #f6f1e7; --paper-alt: #ebe3d3;
+  --ink: #151412; --ink-soft: #4d473d; --deep: #151412; --on-ink: #f6f1e7;
+  --accent: #b3261e; --accent-text: #a3211a; --accent-on-ink: #ff9384; --on-accent: #ffffff;
+  --highlight: #ffe08a; --on-highlight: #151412;
+  --font-display: "Fraunces", Georgia, serif;
+  --font-body: "Source Serif 4", Georgia, serif;
+  --radius: 0px; --size-title: 88px; --size-hero: 124px; --size-eyebrow: 28px;
+}
+html[data-theme="editorial"] :is(h1, h2, h3) { font-weight: 650; letter-spacing: -.015em; }
+html[data-theme="editorial"] .eyebrow {
+  align-self: flex-start; font-family: var(--font-body); font-weight: 600; letter-spacing: .16em;
+  padding-bottom: 10px; border-bottom: 2px solid currentColor;
+}
+html[data-theme="editorial"] .p-title::before {
+  content: ""; position: absolute; left: var(--pad-x); right: var(--pad-x); top: 84px;
+  border-top: 7px double currentColor; opacity: .55;
+}
+html[data-theme="editorial"] .card { background: none; border-top: 4px solid currentColor; border-radius: 0; padding: 24px 6px 0; }
+html[data-theme="editorial"] .card .num { font-family: var(--font-display); font-weight: 800; font-size: 34px; letter-spacing: 0; }
+html[data-theme="editorial"] .steps li::before { font-family: var(--font-display); font-weight: 800; }
+html[data-theme="editorial"] .dot-list li::before { border-radius: 0; width: 14px; height: 14px; }
+html[data-theme="editorial"] .mark { background: linear-gradient(transparent 52%, var(--highlight) 52%); border-radius: 0; }
+html[data-theme="editorial"] .p-quote blockquote { font-weight: 500; }
+html[data-theme="editorial"] .p-figure .shot img { border-radius: 0; box-shadow: 0 0 0 1px rgba(0, 0, 0, .25), 0 14px 40px rgba(0, 0, 0, .14); }
+html[data-theme="editorial"] .p-close .qr img { border-radius: 0; }

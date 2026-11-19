@@ -1,0 +1,34 @@
+/* Night Drive: synthwave. Deep indigo, neon pink and cyan, a horizon grid.
+   Fonts: Unbounded (headlines) + Outfit (text), from Google Fonts,
+   self-hosted in fonts/ under the SIL Open Font License. */
+@font-face { font-family: "Unbounded"; src: url("fonts/unbounded/Unbounded.woff2") format("woff2"); font-weight: 400 800; font-display: swap; }
+@font-face { font-family: "Outfit"; src: url("fonts/outfit/Outfit.woff2") format("woff2"); font-weight: 300 700; font-display: swap; }
+
+html[data-theme="night"], [data-theme-preview="night"] {
+  --paper: #13103a; --paper-alt: #1c1650;
+  --ink: #f5f2ff; --ink-soft: #c9c2f2; --deep: #07051c; --on-ink: #f5f2ff;
+  --accent: #ff3d9a; --accent-text: #ff82c3; --accent-on-ink: #42f0ff; --on-accent: #12082a;
+  --highlight: #42f0ff; --on-highlight: #0b0730;
+  --font-display: "Unbounded", system-ui, sans-serif;
+  --font-body: "Outfit", system-ui, sans-serif;
+  --radius: 18px; --size-title: 74px; --size-hero: 98px; --size-body: 40px;
+}
+html[data-theme="night"] :is(h1, h2, h3) { font-weight: 700; letter-spacing: -.01em; text-shadow: 0 0 30px rgba(255, 61, 154, .35); }
+html[data-theme="night"] .p-title .hero {
+  background: linear-gradient(90deg, #ffffff, #ffc2e2 60%, #a9f7ff); -webkit-background-clip: text; background-clip: text; color: transparent;
+}
+html[data-theme="night"] :is(.surface-paper, .surface-alt) {
+  --fade: var(--paper);
+  background-image:
+    linear-gradient(to bottom, var(--fade) 0, transparent 45%),
+    repeating-linear-gradient(90deg, rgba(66, 240, 255, .16) 0 2px, transparent 2px 96px),
+    repeating-linear-gradient(0deg, rgba(66, 240, 255, .16) 0 2px, transparent 2px 46px);
+  background-size: 100% 30%; background-position: bottom; background-repeat: no-repeat;
+}
+html[data-theme="night"] .surface-alt { --fade: var(--paper-alt); }
+html[data-theme="night"] .surface-ink { background-image: radial-gradient(ellipse at 50% 125%, rgba(255, 61, 154, .38), transparent 62%); }
+html[data-theme="night"] .eyebrow { letter-spacing: .22em; }
+html[data-theme="night"] .card { background: rgba(255, 255, 255, .05); border: 2px solid rgba(66, 240, 255, .45); box-shadow: 0 0 34px rgba(66, 240, 255, .14); }
+html[data-theme="night"] .dot-list li::before { box-shadow: 0 0 14px var(--accent); }
+html[data-theme="night"] .mark { box-shadow: 0 0 20px rgba(66, 240, 255, .55); }
+html[data-theme="night"] .p-figure .shot img { box-shadow: 0 0 0 2px rgba(66, 240, 255, .5), 0 0 60px rgba(255, 61, 154, .3); }

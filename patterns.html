@@ -7,13 +7,14 @@
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Crect width='16' height='16' rx='3' fill='%2317191e'/%3E%3Crect x='3' y='4' width='10' height='7' rx='1' fill='%23ffe27a'/%3E%3C/svg%3E" />
 <title>Slide Patterns</title>
 <link rel="stylesheet" href="theme.css" />
+<script src="engine/themes.js" data-themes="terminal riso" data-default-name="Plain"></script>
 <script type="application/json" id="speaker-notes">[]</script>
 <style>
   /* Only for this gallery: a tag naming the pattern on each slide. */
   .pattern-tag {
-    position: absolute; left: 56px; top: 64px;
+    position: absolute; left: 50%; top: 40px; transform: translateX(-50%); white-space: nowrap;
     font: 600 22px/1 var(--font-mono); padding: 10px 16px; border-radius: 999px;
-    background: var(--highlight); color: var(--ink);
+    background: var(--highlight); color: var(--on-highlight, var(--ink));
   }
 </style>
 </head>

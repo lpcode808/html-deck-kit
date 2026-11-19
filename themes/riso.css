@@ -1,0 +1,28 @@
+/* Riso Zine: risograph print. Paper grain, fluorescent pink and blue,
+   slightly off-register shadows.
+   Fonts: Bricolage Grotesque (headlines) + Work Sans (text), from Google
+   Fonts, self-hosted in fonts/ under the SIL Open Font License. */
+@font-face { font-family: "Bricolage Grotesque"; src: url("fonts/bricolage-grotesque/BricolageGrotesque.woff2") format("woff2"); font-weight: 500 800; font-display: swap; }
+@font-face { font-family: "Work Sans"; src: url("fonts/work-sans/WorkSans.woff2") format("woff2"); font-weight: 400 700; font-display: swap; }
+
+html[data-theme="riso"], [data-theme-preview="riso"] {
+  --paper: #f4eee3; --paper-alt: #fde3ee;
+  --ink: #1c1d4a; --ink-soft: #46476e; --deep: #005b96; --on-ink: #fff8ee;
+  --accent: #d4007c; --accent-text: #c2006f; --accent-on-ink: #ffe800; --on-accent: #ffffff;
+  --highlight: #ffe800; --on-highlight: #1c1d4a;
+  --font-display: "Bricolage Grotesque", system-ui, sans-serif;
+  --font-body: "Work Sans", system-ui, sans-serif;
+  --radius: 6px; --size-title: 90px; --size-hero: 124px;
+}
+html[data-theme="riso"] :is(h1, h2, h3) { font-weight: 800; letter-spacing: -.025em; text-shadow: .045em .035em 0 rgba(255, 72, 176, .5); }
+html[data-theme="riso"] :is(.surface-paper, .surface-alt) {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .11 0 0 0 0 .11 0 0 0 0 .29 0 0 0 .55 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.22'/%3E%3C/svg%3E");
+}
+html[data-theme="riso"] .eyebrow { font-family: var(--font-body); font-weight: 700; letter-spacing: .16em; }
+html[data-theme="riso"] .card { background: rgba(0, 120, 191, .1); border: 2.5px solid currentColor; box-shadow: 7px 7px 0 rgba(212, 0, 124, .55); }
+html[data-theme="riso"] .surface-ink .card { background: rgba(255, 255, 255, .08); box-shadow: 7px 7px 0 rgba(255, 232, 0, .6); }
+html[data-theme="riso"] .steps li::before { font-family: var(--font-display); font-weight: 800; text-shadow: .05em .04em 0 rgba(0, 120, 191, .45); }
+html[data-theme="riso"] .dot-list li::before { box-shadow: 4px 3px 0 rgba(0, 120, 191, .6); }
+html[data-theme="riso"] .mark { box-shadow: 4px 4px 0 rgba(212, 0, 124, .4); }
+html[data-theme="riso"] .p-divider .big-num { text-shadow: .03em .03em 0 rgba(255, 72, 176, .6); }
+html[data-theme="riso"] .p-figure .shot img { border-radius: 4px; box-shadow: 12px 12px 0 rgba(212, 0, 124, .5); }

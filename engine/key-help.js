@@ -75,6 +75,7 @@
     cols.push(section('Present', [
       row(['L'], 'Laser pointer'),
       row(['R'], 'Replay this slide\'s effect'),
+      window.DeckThemes && window.DeckThemes.list.length > 1 ? row(['T'], 'Switch the look: colors, typefaces, shapes (Shift+T: back)') : '',
       window.DeckPeek ? row(['V'], 'Under the hood: this slide\'s map, code and CSS, ready to copy') : '',
       row(['E'], 'Edit words and notes; Presenter view is in its toolbar'),
       row([MOD, 'P'], 'Print: one page per slide, save as PDF'),

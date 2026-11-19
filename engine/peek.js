@@ -54,9 +54,9 @@
     '  font: 600 10.5px/1.3 ui-monospace, Consolas, monospace; white-space: nowrap; background: var(--pk-c); color: #111; }',
     '@keyframes pk-in { from { opacity: 0; transform: scale(.97); } }',
     '.pk-panel { position: fixed; top: 0; right: 0; bottom: 0; width: 42vw; z-index: 2147483150; display: flex; flex-direction: column;',
-    '  background: #14161b; color: #e9e8e3; box-shadow: -20px 0 60px rgba(0,0,0,.45); transform: translateX(102%);',
+    '  background: #14161b; color: #e9e8e3; transform: translateX(102%); visibility: hidden;',
     '  transition: transform .45s cubic-bezier(.2,.8,.2,1); font: 14px/1.45 system-ui, -apple-system, "Segoe UI", sans-serif; }',
-    'html.pk-open .pk-panel { transform: none; }',
+    'html.pk-open .pk-panel { transform: none; visibility: visible; box-shadow: -20px 0 60px rgba(0,0,0,.45); }',
     '@media (max-aspect-ratio: 1/1) { .pk-panel { top: auto; left: 0; width: auto; height: 58vh; transform: translateY(102%); } }',
     '.pk-head { display: flex; align-items: flex-start; gap: 12px; padding: 18px 20px 10px; }',
     '.pk-head h2 { margin: 0; flex: 1; font: 700 18px/1.25 system-ui, sans-serif; }',
@@ -172,6 +172,7 @@
 
   function cssOf(slide) {
     var blocks = [], blocked = false, rootDone = false;
+    var look = document.documentElement.getAttribute('data-theme');
     var els = [slide].concat(Array.prototype.slice.call(slide.querySelectorAll('*')));
     function hits(selectorText) {
       return selectorText.split(',').some(function (part) {
@@ -193,6 +194,7 @@
       var mine = [];
       Array.prototype.forEach.call(rules, function (r) {
         if (!r.selectorText) return;
+        if (look && r.selectorText.indexOf('html[data-theme="' + look + '"],') === 0) { mine.unshift('/* the "' + look + '" look: its own tokens */\n' + format(r)); return; }
         if (r.selectorText === ':root') { if (!rootDone) { rootDone = true; mine.unshift('/* the color and font tokens everything uses */\n' + format(r)); } return; }
         if (/^(\*|html, body|html|body|deck-stage:not\(:defined\))$/.test(r.selectorText)) return;
         if (hits(r.selectorText)) mine.push(format(r));

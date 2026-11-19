@@ -113,6 +113,15 @@ The kit ships neutral grays on purpose. Don't invent a brand.
   drop the files into `fonts/`; log it as waiting on them.
 - **Logos.** Into `assets/`, placed where they ask. Not on every slide
   unless they ask.
+- **Starting from a look.** `themes/` has six (editorial, night, brutal,
+  storybook, terminal, riso): colors, fonts and shapes, scoped to
+  `<html data-theme="name">`. They can try them on the example, effects and
+  layouts pages (Look picker, or T). To adopt one: link
+  `themes/<name>.css` after `theme.css` in `index.html` and add
+  `data-theme="<name>"` to `<html>`. To blend it with their brand, copy its
+  token block into `theme.css` and swap in their colors. Dark looks set
+  `--deep` (dark-slide background) and `--on-highlight`; keep those if they
+  start from one. `check.py` measures every look a deck uses.
 
 ## Effects and interactivity
 
@@ -272,6 +281,7 @@ Thanks with one QR → backup slides and Appendix after the close.
 | `plan/outline.md` | Beats, clock, cut order, parking lot | You, with their OK |
 | `plan/log.md` | One entry per session, newest first | You |
 | `assets/`, `fonts/` | Images, QR codes, video; font files | Either |
+| `themes/` | Six looks (`<name>.css`) and their self-hosted Google Fonts (SIL OFL) | You, when adding a look |
 | `example/` | A finished sample deck with its own `theme.css` and `plan/`. Reference only; never edit it as their deck | Nobody |
 | `engine/` | The slide engine. See `engine/README.md` | Nobody, normally |
 | `scripts/check.py` | Pre-delivery checks | Run it |
@@ -312,6 +322,7 @@ Thanks with one QR → backup slides and Appendix after the close.
 |---|---|
 | ? | Every key, plus what the current slide does (steps, flip cards…) |
 | V | Under the hood: X-ray of the slide, plus its map, HTML, CSS and effect code, with Copy for an AI |
+| T | Switch the look, when the page loads `engine/themes.js` |
 | → ← Space | Next, previous |
 | 1–9 | Jump to that slide |
 | H | Back to the first slide |
