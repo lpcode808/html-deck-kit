@@ -61,6 +61,7 @@ shows every slide layout the kit has, in your colors.
 
 | Key | Does |
 |---|---|
+| ? | Every key, and what the slide you're on does |
 | → ← Space | Next, previous |
 | G | See all slides; drag to reorder; right-click to skip one |
 | F | Search for a slide |

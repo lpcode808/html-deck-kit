@@ -143,7 +143,7 @@ def ratio(a, b):
 
 # The names engine/effects.js knows (see effects.html).
 FX_NAMES = {"stagger", "steps", "typewriter", "scramble", "count", "pop", "mark",
-            "zoom", "reveal", "flip", "timer", "clock"}
+            "zoom", "reveal", "flip", "timer", "clock", "until", "today"}
 
 # (text token, background token, what it's used for)
 # 4.5:1 is the floor for text (WCAG AA). 3:1 is the floor for non-text marks

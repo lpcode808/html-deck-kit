@@ -23,7 +23,13 @@
  *     flip        a card with .front and .back children turns over
  *   Live:
  *     timer       counts down data-seconds (default 300) while the slide shows
- *     clock       shows the viewer's current time
+ *     clock       the viewer's current time, ticking seconds
+ *                 (data-fx-format="short" drops the seconds)
+ *     until       counts down to a clock time: data-until="13:00" (24-hour),
+ *                 or "+10" for ten minutes after the slide appears.
+ *                 data-done="now" is what it says at zero (default 0:00)
+ *     today       the viewer's day of the week
+ *                 (data-fx-format="date" adds the date)
  *
  * Several names can share one attribute: data-fx="stagger pop".
  *
@@ -77,7 +83,7 @@
     '.fx-typed::after { content: ""; display: inline-block; width: .08em; height: .9em; margin-left: .04em; vertical-align: -.08em; background: currentColor; animation: fx-caret .8s steps(1) infinite; }',
     '.fx-ghost { visibility: hidden; }',
     '@keyframes fx-caret { 50% { opacity: 0; } }',
-    '[data-fx~="count"], [data-fx~="timer"], [data-fx~="clock"] { font-variant-numeric: tabular-nums; }',
+    '[data-fx~="count"], [data-fx~="timer"], [data-fx~="clock"], [data-fx~="until"] { font-variant-numeric: tabular-nums; }',
 
     /* the no-transition switch used while resetting a slide */
     '.fx-reset, .fx-reset * { transition: none !important; animation: none !important; }',
@@ -218,9 +224,43 @@
     clock: function (el) {
       if (el.__fxOrig === undefined) el.__fxOrig = el.textContent;
       restorers.push(function () { el.textContent = el.__fxOrig; });
-      var put = function () { el.textContent = new Date().toLocaleTimeString([], { hour: 'numeric', minute: '2-digit' }); };
+      var opts = { hour: 'numeric', minute: '2-digit' };
+      if (el.getAttribute('data-fx-format') !== 'short') opts.second = '2-digit';
+      var put = function () { el.textContent = new Date().toLocaleTimeString([], opts); };
       put();
-      every(put, 10000);
+      every(put, 1000);
+    },
+    until: function (el) {
+      var spec = (el.getAttribute('data-until') || '').trim();
+      var now = new Date(), target = null, m = spec.match(/^(\d{1,2}):(\d{2})$/);
+      if (/^\+\d+$/.test(spec)) target = new Date(now.getTime() + Number(spec.slice(1)) * 60000);
+      else if (m) {
+        target = new Date(now);
+        target.setHours(Number(m[1]), Number(m[2]), 0, 0);
+        if (target <= now) target.setDate(target.getDate() + 1);
+      }
+      if (!target) return;
+      if (el.__fxOrig === undefined) el.__fxOrig = el.textContent;
+      restorers.push(function () { el.textContent = el.__fxOrig; });
+      var done = el.getAttribute('data-done') || '0:00';
+      var two = function (n) { return String(n).padStart(2, '0'); };
+      var put = function () {
+        var s = Math.round((target - Date.now()) / 1000);
+        if (s <= 0) { el.textContent = done; return; }
+        var h = Math.floor(s / 3600), mm = Math.floor(s % 3600 / 60), ss = s % 60;
+        // Under an hour reads like a clock (4:12); over, spell it out so
+        // it can't be mistaken for a time of day (2h 05m 09s).
+        el.textContent = h ? h + 'h ' + two(mm) + 'm ' + two(ss) + 's' : mm + ':' + two(ss);
+      };
+      put();
+      every(put, 1000);
+    },
+    today: function (el) {
+      if (el.__fxOrig === undefined) el.__fxOrig = el.textContent;
+      restorers.push(function () { el.textContent = el.__fxOrig; });
+      var opts = el.getAttribute('data-fx-format') === 'date'
+        ? { weekday: 'long', month: 'long', day: 'numeric' } : { weekday: 'long' };
+      el.textContent = new Date().toLocaleDateString([], opts);
     }
   };
   var ORDER = Object.keys(FX);

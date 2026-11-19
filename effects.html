@@ -21,7 +21,9 @@
   "reveal: blurred until you click it. Let the room guess first.",
   "flip: cards with a front and a back turn over when you click them.",
   "timer: counts down while the slide is up and stops when you leave.",
-  "clock: shows the viewer's own time. Proof the slide is alive.",
+  "clock: shows the viewer's own time, seconds ticking. data-fx-format=\"short\" drops the seconds.",
+  "today: the viewer's day of the week. data-fx-format=\"date\" adds the date.",
+  "until: counts down to a clock time (data-until=\"13:00\", 24-hour) or minutes from now (data-until=\"+10\"). data-done sets what it says at zero.",
   "Magic keys: press them any time during a talk. They sit on top of the slide and never change it. X clears everything.",
   "Anything you can describe, an agent can build. engine/effects.js is the model to copy.",
   "The rules every effect here follows. Worth keeping for anything new you add."
@@ -80,7 +82,7 @@
     <p class="eyebrow">The effects menu</p>
     <h1 class="hero">Every slide in here is alive. Go ahead, poke it</h1>
     <p class="sub">Find an effect you like, copy the line under it, paste it to your agent</p>
-    <p class="byline">→ to start · G to see them all · ? for the secret keys</p>
+    <p class="byline">→ to start · G to see them all · ? for every key</p>
   </section>
 
   <section data-screen-label="Menu" class="surface-paper">
@@ -99,6 +101,8 @@
       <button data-go="Flip">flip<small>cards turn over</small></button>
       <button data-go="Timer">timer<small>a live countdown</small></button>
       <button data-go="Clock">clock<small>knows your time</small></button>
+      <button data-go="Today">today<small>knows your day</small></button>
+      <button data-go="Until">until<small>counts to a time</small></button>
       <button data-go="Magic Keys">magic keys<small>confetti and friends</small></button>
       <button data-go="Make Your Own">your own<small>describe it</small></button>
     </div>
@@ -200,8 +204,22 @@
   <section data-screen-label="Clock" class="surface-paper p-statement">
     <p class="eyebrow">Effect · clock</p>
     <h2 class="title">It's <span class="mark" data-fx="clock">right now</span> where you are</h2>
-    <p class="sub">A picture of a slide couldn't know that</p>
+    <p class="sub">Watch the seconds. A picture of a slide couldn't do that</p>
     <div class="say" data-no-edit><b>Say to your agent</b><code>Show the local time on my Welcome slide (clock effect from effects.html).</code><button type="button">Copy</button></div>
+  </section>
+
+  <section data-screen-label="Today" class="surface-alt p-statement">
+    <p class="eyebrow">Effect · today</p>
+    <h2 class="title">Happy <span class="mark" data-fx="today">day</span>. Thanks for spending a bit of it here</h2>
+    <p class="sub">It's your day of the week, filled in by your own computer</p>
+    <div class="say" data-no-edit><b>Say to your agent</b><code>Greet the room with today's weekday on my Title slide (today effect from effects.html).</code><button type="button">Copy</button></div>
+  </section>
+
+  <section data-screen-label="Until" class="surface-ink p-statement">
+    <p class="eyebrow">Effect · until</p>
+    <h2 class="title">Midnight is <span data-fx="until" data-until="24:00">a little while</span> away</h2>
+    <p class="sub">Counts down to a clock time. Made for walk-in slides: "We start in 4:12"</p>
+    <div class="say" data-no-edit><b>Say to your agent</b><code>On my walk-in slide, count down to our 1:00 PM start and say "now" at zero (until effect from effects.html).</code><button type="button">Copy</button></div>
   </section>
 
   <section data-screen-label="Magic Keys" class="surface-ink">
@@ -246,6 +264,7 @@
 <script src="engine/deck-stage.js"></script>
 <script src="engine/slide-numbers.js"></script>
 <script src="engine/slide-search.js" defer></script>
+<script src="engine/key-help.js" defer></script>
 <script src="engine/effects.js" defer></script>
 <script src="engine/magic-keys.js" defer></script>
 <script>

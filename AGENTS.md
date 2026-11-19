@@ -298,6 +298,7 @@ Thanks with one QR → backup slides and Appendix after the close.
 
 | Key | Does |
 |---|---|
+| ? | Every key, plus what the current slide does (steps, flip cards…) |
 | → ← Space | Next, previous |
 | 1–9 | Jump to that slide |
 | H | Back to the first slide |

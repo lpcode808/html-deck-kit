@@ -17,7 +17,7 @@
  *            this with data-timer="quiet" gets a small, dim, silent badge
  *            (a clock for the presenter, not the room).
  *   X        clear every effect, the timer and any sound
- *   ?        key list (? or Esc closes); it also lists deck-stage's own keys
+ *   ?        the key list lives in key-help.js, which lists these keys too
  *
  * Sounds are synthesized with Web Audio, no audio files. Effects live in one
  * fixed layer over the deck; they never touch the slides, and print hides
@@ -473,7 +473,7 @@
     helpEl.addEventListener('click', () => help(false));
   }
 
-  const KEYS = { b: fx.blur, '.': fx.blur, c: fx.confetti, d: fx.drumroll, m: fx.micdrop, o: fx.bubbles, q: fx.quiet, u: fx.curtain, x: fx.clear, '?': () => help() };
+  const KEYS = { b: fx.blur, '.': fx.blur, c: fx.confetti, d: fx.drumroll, m: fx.micdrop, o: fx.bubbles, q: fx.quiet, u: fx.curtain, x: fx.clear };
 
   // Capture phase on window, so digits never reach deck-stage's
   // jump-to-slide handler.
